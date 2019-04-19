@@ -41,7 +41,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/External/CMake")
 message(STATUS "CMake Module path(s): ${CMAKE_MODULE_PATH}")
 
 # Set compiler based on preferences (e.g. USE_CLANG) and system.
-include(compiler)
+#include(compiler)
 
 # Set root-directory for code to current source directory.
 set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
@@ -287,7 +287,40 @@ if(USE_JSON)
   list(APPEND SUBDIRS ${JSONINTERFACEDIR})
 endif()
 
+option(BUILD_PYBINDINGS  "Build the Tudat Python modules" OFF)
+if(NOT BUILD_PYBINDINGS)
+ message(STATUS "Not building the python modules.")
+else()
+
+ message(STATUS "Searching for the python module dependencies...")
+
+ set(Boost_USE_STATIC_LIBS OFF) # It is not possible to statically link boost and emit a python module
+  # That is because a python module is a shared library. The linker rightfully complains about illegal relocations.
+
+ ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) # Necessary consequence of Boost dynamic linking, so the unit tests compiles
+
+ find_package(Boost 1.45.0 COMPONENTS date_time system unit_test_framework filesystem regex python REQUIRED)
+
+ if(NOT APPLE OR APPLE_INCLUDE_FORCE)
+  include_directories(SYSTEM AFTER "${Boost_INCLUDE_DIRS}")
+ else( )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem \"${Boost_INCLUDE_DIRS}\"")
+ endif( )
+
+ find_package(PythonInterp)
+ find_package(PythonLibs)
+
+  # include_directories for python is set at the PyBindings target level
+  # (The rest of tudat doesn't need these headers -- slows down compilation)
+
+ message(STATUS "Building the python modules!")
+ set(PYBINDINGS_DIR "/PyBindings")
+ list(APPEND SUBDIRS ${PYBINDINGS_DIR})
+endif()
+
 # Add sub-directories to CMake process.
 foreach(CURRENT_SUBDIR ${SUBDIRS})
   add_subdirectory("${SRCROOT}${CURRENT_SUBDIR}")
 endforeach(CURRENT_SUBDIR)
+
+
