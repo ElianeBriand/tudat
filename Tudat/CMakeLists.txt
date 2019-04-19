@@ -299,7 +299,7 @@ else()
 
  ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) # Necessary consequence of Boost dynamic linking, so the unit tests compiles
 
- find_package(Boost 1.45.0 COMPONENTS date_time system unit_test_framework filesystem regex python REQUIRED)
+ find_package(Boost 1.45.0 COMPONENTS date_time system unit_test_framework filesystem numpy regex python REQUIRED)
 
  if(NOT APPLE OR APPLE_INCLUDE_FORCE)
   include_directories(SYSTEM AFTER "${Boost_INCLUDE_DIRS}")

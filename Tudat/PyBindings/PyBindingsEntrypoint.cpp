@@ -13,7 +13,7 @@
 
 #include <iostream>
 
-#include "DataStructures/EigenWrapper.h"
+#include "Tudat/PyBindings/DataStructures/eigenWrapper.h"
 
 namespace p = boost::python;
 namespace np = boost::numpy;
@@ -21,7 +21,7 @@ namespace np = boost::numpy;
 BOOST_PYTHON_MODULE (Tudat) {
 
     //Py_Initialize();
-    //np::initialize();
+    np::initialize();
 
     tudat::PyBindings_internal::PyExport_EigenDatastructures();
 
