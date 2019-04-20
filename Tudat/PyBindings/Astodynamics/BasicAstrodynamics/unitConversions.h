@@ -8,24 +8,16 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
-#include <boost/python.hpp>
-#include <boost/numpy.hpp>
+#ifndef TUDAT_PYBINDINGS_UNITCONVERSIONS_H
+#define TUDAT_PYBINDINGS_UNITCONVERSIONS_H
 
-namespace p = boost::python;
-namespace np = boost::numpy;
+namespace tudat {
+    namespace PyBindings_internal {
 
-#include "DataStructures/eigenWrapper.h"
-#include "Astodynamics/BasicAstrodynamics/unitConversions.h"
+        void PyExport_unitConversions();
 
-
-
-BOOST_PYTHON_MODULE (Tudat) {
-
-    //Py_Initialize();
-    np::initialize();
-
-    tudat::PyBindings_internal::PyExport_EigenDatastructures();
-    tudat::PyBindings_internal::PyExport_unitConversions();
-
-
+    }
 }
+
+
+#endif //TUDAT_PYBINDINGS_UNITCONVERSIONS_H

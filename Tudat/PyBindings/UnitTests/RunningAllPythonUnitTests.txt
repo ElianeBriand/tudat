@@ -1,0 +1,5 @@
+In this directory, simply execute :
+
+python -m unittest discover --pattern=*.py
+
+to automatically find and run all unit tests.

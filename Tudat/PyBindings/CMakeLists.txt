@@ -13,11 +13,13 @@
 set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/PyBindingsEntrypoint.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/DataStructures/eigenWrapper.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/unitConversions.cpp"
         )
 
 # Set the header files.
 set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/DataStructures/eigenWrapper.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/unitConversions.h"
         )
 
 
