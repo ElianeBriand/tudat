@@ -16,6 +16,7 @@ namespace np = boost::numpy;
 
 #include "DataStructures/eigenWrapper.h"
 #include "Astodynamics/BasicAstrodynamics/unitConversions.h"
+#include "Astodynamics/BasicAstrodynamics/physicalConstants.h"
 
 
 
@@ -26,6 +27,6 @@ BOOST_PYTHON_MODULE (Tudat) {
 
     tudat::PyBindings_internal::PyExport_EigenDatastructures();
     tudat::PyBindings_internal::PyExport_unitConversions();
-
+    tudat::PyBindings_internal::PyExport_physicalConstants();
 
 }

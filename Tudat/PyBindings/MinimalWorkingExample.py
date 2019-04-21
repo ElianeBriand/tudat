@@ -21,7 +21,7 @@ positionAttractingBody = ptd.Vector3d.Zero()
 v = ptd.Vector3d()
 v.x = 1
 v.y = 2.0
-v.z = 3.1
+v.z = 3.2
 print("x = {0} y = {1} z = {2}".format(v.x,v.y,v.z))
 
 

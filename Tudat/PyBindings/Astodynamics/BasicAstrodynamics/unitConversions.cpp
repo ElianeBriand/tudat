@@ -18,7 +18,8 @@ namespace p = boost::python;
 namespace np = boost::numpy;
 
 namespace {
-    class dummyClassA {
+    class dummyClassA_unitConversions {
+        int i;
     };
 }
 
@@ -26,9 +27,9 @@ void tudat::PyBindings_internal::PyExport_unitConversions(){
 
     {
         p::scope engineScope
-                = p::class_<dummyClassA>("units");
+                = p::class_<dummyClassA_unitConversions>("units");
 
-        // Python builtin "float" is actually a double : specializing for this case
+        // Note: Python builtin "float" is actually a double : specializing for this case
         p::def("convertRadiansToDegrees", &tudat::unit_conversions::convertRadiansToDegrees<double>);
         p::def("convertDegreesToRadians", &tudat::unit_conversions::convertDegreesToRadians<double>);
 
