@@ -12,16 +12,20 @@
 # Set the source files.
 set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/PyBindingsEntrypoint.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/DataStructures/eigenWrapper.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/unitConversions.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/physicalConstants.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.cpp"
+
         )
 
 # Set the header files.
 set(PYBINDINGS_HEADERS
-        "${SRCROOT}${PYBINDINGS_DIR}/DataStructures/eigenWrapper.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/unitConversions.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/Astodynamics/BasicAstrodynamics/physicalConstants.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+
          )
 
 
@@ -37,6 +41,7 @@ set_target_properties(PyBindings PROPERTIES COMPILE_FLAGS " -fPIC ")
 set_target_properties(PyBindings PROPERTIES LINK_FLAGS " -shared -Wl,-Bshareable")
 set_target_properties(PyBindings PROPERTIES PREFIX "")
 set_target_properties(PyBindings PROPERTIES OUTPUT_NAME "Tudat")
+target_link_libraries(PyBindings tudat_gravitation  tudat_basic_astrodynamics)
 target_link_libraries(PyBindings -Wl,-Bshareable ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
 
 add_custom_command(

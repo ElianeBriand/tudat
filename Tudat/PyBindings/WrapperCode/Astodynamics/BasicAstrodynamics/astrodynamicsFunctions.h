@@ -8,15 +8,16 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
-#ifndef TUDAT_PYBINDINGS_EIGENWRAPPER_H
-#define TUDAT_PYBINDINGS_EIGENWRAPPER_H
+#ifndef TUDAT_PYBINDINGS_ASTODYNAMICSFUNCTIONS_H
+#define TUDAT_PYBINDINGS_ASTODYNAMICSFUNCTIONS_H
 
 namespace tudat {
     namespace PyBindings_internal {
 
-        void PyExport_EigenDatastructures();
+        void PyExport_astrodynamicsFunctions();
 
     }
 }
 
-#endif // TUDAT_PYBINDINGS_EIGENWRAPPER_H
+
+#endif //TUDAT_PYBINDINGS_ASTODYNAMICSFUNCTIONS_H

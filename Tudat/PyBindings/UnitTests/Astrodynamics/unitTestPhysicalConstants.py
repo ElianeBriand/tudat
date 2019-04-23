@@ -11,7 +11,7 @@ class TestPhysicalConstants(unittest.TestCase):
 
     # See unitTestPhysicalConstants.cpp for the sources of the various test values
 
-    def test_testRelationsBetweenPhysicalConstant(self):
+    def test_RelationsBetweenPhysicalConstant(self):
         self.assertAlmostEqual(
             ptd.constants.JULIAN_YEAR_IN_SECONDS,
             ptd.constants.JULIAN_DAY_IN_SECONDS * ptd.constants.JULIAN_YEAR_IN_DAYS,

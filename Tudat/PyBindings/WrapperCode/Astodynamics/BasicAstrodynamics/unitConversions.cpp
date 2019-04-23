@@ -19,7 +19,6 @@ namespace np = boost::numpy;
 
 namespace {
     class dummyClassA_unitConversions {
-        int i;
     };
 }
 

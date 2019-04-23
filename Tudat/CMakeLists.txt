@@ -316,6 +316,7 @@ else()
  message(STATUS "Building the python modules!")
  set(PYBINDINGS_DIR "/PyBindings")
  list(APPEND SUBDIRS ${PYBINDINGS_DIR})
+ set(CMAKE_POSITION_INDEPENDENT_CODE ON) # We need -fPIC even in static libraries
 endif()
 
 # Add sub-directories to CMake process.

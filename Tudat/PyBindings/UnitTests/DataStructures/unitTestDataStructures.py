@@ -6,7 +6,7 @@ import math
 
 floatingPointPlaceTolerance = 7 # Assert check to 7 decimal places
 
-class TestEigenStructures(unittest.TestCase):
+class TestEigenStructures_Vector3d(unittest.TestCase):
 
     def test_Vector3d_ConstructionComparison(self):
         v1 = ptd.Vector3d()
@@ -51,7 +51,7 @@ class TestEigenStructures(unittest.TestCase):
 
 
     def test_Vector3d_Numpy(self):
-        v = ptd.Vector3d(1.4,-2.1,3.9)
+        v = ptd.Vector3d(1.4, -2.1, 3.9)
 
         vnp = v.toNumpy()
 
@@ -78,6 +78,8 @@ class TestEigenStructures(unittest.TestCase):
 
         self.assertEqual(sum,refsum)
 
+
+
     def test_Vector3d_normalization(self):
         v = ptd.Vector3d(1.4,-2.1,3.9)
 
@@ -88,6 +90,57 @@ class TestEigenStructures(unittest.TestCase):
         v.normalize()
 
         self.assertAlmostEqual(v.norm(),1.0, places=floatingPointPlaceTolerance)
+
+    def test_Vector6d_ConstructionComparisonIndexing(self):
+        v1 = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2, 3.1)
+
+        v2 = ptd.Vector6d()
+        v2[0] = 2.3
+        v2[1] = 0.1
+        v2[2] = -1.4
+        v2[3] = 1
+        v2[4] = 2
+        v2[5] = 3.1
+
+        v3 = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2, 3.1)
+
+        self.assertFalse(v1 == v2)
+        self.assertTrue(v1 != v2)
+
+        v2[1] = 0.0
+
+        self.assertFalse(v1 != v2)
+        self.assertTrue(v1 == v2)
+
+        self.assertEqual(v1[5], 3.1)
+        self.assertEqual(v1[0], 2.3)
+
+        self.assertFalse(v1 != v3)
+        self.assertTrue(v1 == v3)
+
+        with self.assertRaises(TypeError):
+            a = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2)
+
+    def test_Vector6d_Indexing(self):
+        v1 = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2, 3.1)
+
+
+        self.assertEqual(v1[2], -1.4)
+
+        with self.assertRaises(IndexError):
+            v1[6] = 3
+        with self.assertRaises(IndexError):
+            a = v1[6]
+
+    def test_Vector6d_Numpy(self):
+        v = ptd.Vector6d(1.4, -2.1, 3.9, 9.4, 2.78, 2.5)
+
+        vnp = v.toNumpy()
+
+        refnp = np.array([[1.4], [-2.1], [3.9],[9.4], [2.78], [2.5]])
+
+        self.assertTrue(np.allclose(vnp, refnp))
+
 
 if __name__ == '__main__':
     unittest.main()
