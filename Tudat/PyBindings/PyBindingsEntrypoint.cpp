@@ -27,6 +27,8 @@ BOOST_PYTHON_MODULE (Tudat) {
     //Py_Initialize();
     np::initialize();
 
+    p::docstring_options doc_options(true, true, true);
+
     tudat::PyBindings_internal::PyExport_EigenDatastructures();
     tudat::PyBindings_internal::PyExport_unitConversions();
     tudat::PyBindings_internal::PyExport_physicalConstants();
