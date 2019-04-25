@@ -137,7 +137,55 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
 
         vnp = v.toNumpy()
 
-        refnp = np.array([[1.4], [-2.1], [3.9],[9.4], [2.78], [2.5]])
+        refnp = np.array([[1.4], [-2.1], [3.9], [9.4], [2.78], [2.5]])
+
+        self.assertTrue(np.allclose(vnp, refnp))
+
+    def test_Vector4d_ConstructionComparisonIndexing(self):
+        v1 = ptd.Vector4d(2.3, 0.0, -1.4, 1)
+
+        v2 = ptd.Vector4d()
+        v2[0] = 2.3
+        v2[1] = 0.1
+        v2[2] = -1.4
+        v2[3] = 1
+
+        v3 = ptd.Vector4d(2.3, 0.0, -1.4, 1)
+
+        self.assertFalse(v1 == v2)
+        self.assertTrue(v1 != v2)
+
+        v2[1] = 0.0
+
+        self.assertFalse(v1 != v2)
+        self.assertTrue(v1 == v2)
+
+        self.assertEqual(v1[3], 1.0)
+        self.assertEqual(v1[0], 2.3)
+
+        self.assertFalse(v1 != v3)
+        self.assertTrue(v1 == v3)
+
+        with self.assertRaises(TypeError):
+            a = ptd.Vector4d(2.3, 0.0, -1.4, 1, 2)
+
+    def test_Vector4d_Indexing(self):
+        v1 = ptd.Vector4d(2.3, 0.0, -1.4, 1)
+
+
+        self.assertEqual(v1[2], -1.4)
+
+        with self.assertRaises(IndexError):
+            v1[4] = 3
+        with self.assertRaises(IndexError):
+            a = v1[4]
+
+    def test_Vector4d_Numpy(self):
+        v = ptd.Vector4d(1.4, -2.1, 3.9, 9.4)
+
+        vnp = v.toNumpy()
+
+        refnp = np.array([[1.4], [-2.1], [3.9], [9.4]])
 
         self.assertTrue(np.allclose(vnp, refnp))
 

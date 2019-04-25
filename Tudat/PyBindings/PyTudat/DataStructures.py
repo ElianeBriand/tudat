@@ -84,3 +84,48 @@ def Vector6d_Zero():
     return v
 
 Vector6d.Zero = Vector6d_Zero
+
+
+# Extending Vector4d in python
+
+def Vector4d_str(self):
+    return "[ {0} {1} {2} {3} ]".format(*tuple(self))
+
+Vector4d.__str__ = Vector4d_str
+
+def Vector4d_eq(self, other):
+    return tuple(self) == tuple(other)
+
+Vector4d.__eq__ = Vector4d_eq
+
+def Vector4d_ne(self, other):
+    return tuple(self) != tuple(other)
+
+Vector4d.__ne__ = Vector4d_ne
+
+def Vector4d_len(self):
+    return 4
+Vector4d.__len__ = Vector4d_len
+
+def Vector4d_getitem(self, key):
+    if (key > 3) or (key < 0):
+        raise IndexError('Vector4d index out of range (max 3)')
+    return self._getElemAtIndex(key)
+Vector4d.__getitem__ = Vector4d_getitem
+
+def Vector4d_setitem(self, key,value):
+    if (key > 3) or (key < 0):
+        raise IndexError('Vector4d index out of range (max 3)')
+
+    self._setElemAtIndex(key,float(value))
+Vector4d.__setitem__ = Vector4d_setitem
+
+
+
+def Vector4d_Zero():
+    v = Vector4d()
+    for i in range(6):
+        v[i] = 0.0
+    return v
+
+Vector4d.Zero = Vector4d_Zero

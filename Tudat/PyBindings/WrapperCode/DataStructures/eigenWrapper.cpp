@@ -24,7 +24,6 @@
 #include "Tudat/Basics/basicTypedefs.h"
 
 
-
 namespace p = boost::python;
 namespace np = boost::numpy;
 
@@ -81,7 +80,7 @@ namespace tudat {
         }
 
         // C++ classes to python datatype converting methods
-        template <typename EigenVectorType>
+        template<typename EigenVectorType>
         p::list Vector_toList(EigenVectorType* vec) {
             p::list vecList;
 
@@ -96,26 +95,24 @@ namespace tudat {
 
 
         // Useful helpers for python []-access
-        template <typename EigenVectorType>
+        template<typename EigenVectorType>
         void Vector_setElemAtIndexHelper(EigenVectorType* vec, int index, double value) {
-            if(index >= EigenVectorType::RowsAtCompileTime || index < 0)
-            {
+            if (index >= EigenVectorType::RowsAtCompileTime || index < 0) {
                 throw std::out_of_range("Vector access out of range.");
             }
             (*vec)[index] = value;
         }
 
-        template <typename EigenVectorType>
+        template<typename EigenVectorType>
         double Vector_getElemAtIndexHelper(EigenVectorType* vec, int index) {
-            if(index >= EigenVectorType::RowsAtCompileTime || index < 0)
-            {
+            if (index >= EigenVectorType::RowsAtCompileTime || index < 0) {
                 throw std::out_of_range("Vector access out of range.");
             }
             return (*vec)[index];
         }
 
 
-        template <typename EigenVectorType>
+        template<typename EigenVectorType>
         class EigenVector_iterator
                 : public boost::iterator_facade<EigenVector_iterator<EigenVectorType>, double, boost::forward_traversal_tag> {
         public:
@@ -125,9 +122,8 @@ namespace tudat {
             {}
 
             explicit EigenVector_iterator(EigenVectorType* vector)
-            : vector_(vector),
-              position(0)
-                    {}
+                    : vector_(vector),
+                      position(0) {}
 
         private:
             EigenVectorType* vector_;
@@ -137,51 +133,40 @@ namespace tudat {
 
             void increment() { position++; }
 
-            bool equal(EigenVector_iterator const& other) const
-            {
+            bool equal(EigenVector_iterator const &other) const {
                 return this->position == other.position;
             }
 
-            double& dereference() const {
-                if(position < EigenVectorType::RowsAtCompileTime) {
+            double &dereference() const {
+                if (position < EigenVectorType::RowsAtCompileTime) {
                     return (*vector_)[position];
-                }else {
+                } else {
                     throw std::out_of_range("Vector iterator out of range");
                 }
             }
 
         };
 
-        template <typename EigenVectorType>
-        EigenVector_iterator<EigenVectorType> Vector_begin(EigenVectorType& vec) {
+        template<typename EigenVectorType>
+        EigenVector_iterator<EigenVectorType> Vector_begin(EigenVectorType &vec) {
             return EigenVector_iterator<EigenVectorType>(&vec);
         }
 
-        template <typename EigenVectorType>
-        EigenVector_iterator<EigenVectorType> Vector_end(EigenVectorType& vec) {
+        template<typename EigenVectorType>
+        EigenVector_iterator<EigenVectorType> Vector_end(EigenVectorType &vec) {
             return EigenVector_iterator<EigenVectorType>();
         }
 
-        // Note: templating the *_toNPArray family of function leads runtime error :
-        //       "TypeError: No to_python (by-value) converter found for C++ type: Eigen::Matrix<double, 3, 1, 0, 3, 1>::{unnamed type#2}"
-        //       Not knowing how to fix this, one function for each type is written.
-        np::ndarray Vector3d_toNPArray(Eigen::Vector3d* vec) {
 
-            p::tuple shape = p::make_tuple(3, 1); // as row vector
+        template<typename EigenVectorType>
+        np::ndarray Vector_toNPArray(EigenVectorType* vec) {
+
+            constexpr const unsigned int rows = EigenVectorType::RowsAtCompileTime;
+            p::tuple shape = p::make_tuple(rows, 1); // as row vector
             np::dtype dtype = np::dtype::get_builtin<double>();
 
-            p::list vecAsPythonList = Vector_toList<Eigen::Vector3d>(vec);
-            np::ndarray a = np::array(vecAsPythonList,dtype);
-            return a;
-        }
-
-        np::ndarray Vector6d_toNPArray(Eigen::Vector6d* vec) {
-
-            p::tuple shape = p::make_tuple(6, 1); // as row vector
-            np::dtype dtype = np::dtype::get_builtin<double>();
-
-            p::list vecAsPythonList = Vector_toList<Eigen::Vector6d>(vec);
-            np::ndarray a = np::array(vecAsPythonList,dtype);
+            p::list vecAsPythonList = Vector_toList<EigenVectorType>(vec);
+            np::ndarray a = np::array(vecAsPythonList, dtype);
             return a;
         }
 
@@ -190,16 +175,82 @@ namespace tudat {
             return ret;
         }
 
-        std::shared_ptr<Eigen::Vector6d> Vector6d_ConstructorWrapper_values(double v0, double v1, double v2, double v3, double v4, double v5) {
-            auto ret = std::make_shared<Eigen::Vector6d>();
-            (*ret)[0] = v0;
-            (*ret)[1] = v1;
-            (*ret)[2] = v2;
-            (*ret)[3] = v3;
-            (*ret)[4] = v4;
-            (*ret)[5] = v5;
+        template<typename EigenVectorType>
+        void ConstructorWrapper_values_internal(std::shared_ptr<EigenVectorType> vector, double value) {
+            constexpr const unsigned int rows = EigenVectorType::RowsAtCompileTime;
+            (*vector)[rows - 1] = value;
+        }
+
+        template<typename EigenVectorType, typename... Args>
+        void ConstructorWrapper_values_internal(std::shared_ptr<EigenVectorType> vector, double first, Args... args) {
+            constexpr const unsigned int rows = EigenVectorType::RowsAtCompileTime;
+            constexpr const unsigned int numParamsAfterPeel = sizeof...(args);
+
+            (*vector)[rows - (numParamsAfterPeel + 1)] = first;
+            ConstructorWrapper_values_internal<EigenVectorType>(vector, args...);
+        }
+
+
+        /* Helper class for C++11 equivalent to fold expressions "... && <condition>" */
+        // TODO : Create and transfer into TemplateMagic.h if needed elsewhere
+        template <bool... B>
+        struct conjunction {};
+
+        template <bool Head, bool... Tail>
+        struct conjunction<Head, Tail...>
+                : std::integral_constant<bool, Head && conjunction<Tail...>::value>{};
+
+        template <bool B>
+        struct conjunction<B> : std::integral_constant<bool, B> {};
+
+
+        /** As a way to create python constructors, fills a VectorNd with N elements provided as arguments.
+         *
+         * This is used typically when declaring __init__ bindings like this :
+         *     .def("__init__", p::make_constructor(&ConstructorWrapper_values<Eigen::Vector4d,double,double,double,double>))
+         * It is necessary to add the "double" type as many times as there are rows in the vector to allow correct type deduction,
+         * however there are compile-time checks that forbid : 1/ using types other than double 2/ using a number of argument
+         * not exactly equal to the number of vector row.
+         *
+         * */
+        template<
+                typename EigenVectorType,
+                typename... Args,
+                // Template magic to restrict the arguments to those implicitly convertible to double :
+                //    This one is C++17, and removes the need for the above helper templates :
+                //        class Enable = std::enable_if_t<(... && std::is_convertible<Args, double>::value)>,
+                //    This one is C++11 :
+                class Enable = typename std::enable_if<
+                        conjunction<std::is_same<Args, double>::value...>::value>::type,
+                // Again to discards possible overload where the number of args is not the number of rows.
+                // (So we avoid bugs when we specify incorrect number of "double" after the vector type)
+                typename = typename std::enable_if<
+                        sizeof...(Args) == EigenVectorType::RowsAtCompileTime
+                >::type
+        >
+        std::shared_ptr<EigenVectorType> ConstructorWrapper_values(Args... values) {
+            auto ret = std::make_shared<EigenVectorType>();
+
+            // Compile time loop to insert the constructor arguments in the vector
+            ConstructorWrapper_values_internal<EigenVectorType>(ret, values...);
+
             return ret;
         }
+
+
+        /** As a way to create python constructors, default construct a VectorNd with N elements. */
+        template<typename EigenVectorType>
+        std::shared_ptr<EigenVectorType> Vector_ConstructorWrapper_default() {
+            auto ret = std::make_shared<EigenVectorType>();
+            return ret;
+        }
+
+
+        std::shared_ptr<Eigen::Vector4d> Vector4d_ConstructorWrapper_default() {
+            auto ret = std::make_shared<Eigen::Vector4d>();
+            return ret;
+        }
+
 
 
         void PyExport_EigenDatastructures() {
@@ -216,25 +267,36 @@ namespace tudat {
                     .def("norm", &Eigen::Vector3d::norm)
                     .def("normalize", &Eigen::Vector3d::normalize)
                     .def("columnList", &Vector_toList<Eigen::Vector3d>)
-                    .def("__iter__", p::range(&Vector_begin<Eigen::Vector3d>,&Vector_end<Eigen::Vector3d>))
-                    .def("toNumpy", &Vector3d_toNPArray)
+                    .def("__iter__", p::range(&Vector_begin<Eigen::Vector3d>, &Vector_end<Eigen::Vector3d>))
+                    .def("toNumpy", &Vector_toNPArray<Eigen::Vector3d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector3d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector3d>)
-                    ;
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector3d>);
 
 
             p::class_<Eigen::Vector6d, std::shared_ptr<Eigen::Vector6d>>("Vector6d", p::no_init)
                     // Some magic is required to implement the constructor as a wrapper (because Eigen doesn't define it)
-                    .def("__init__", p::make_constructor(&Vector6d_ConstructorWrapper_values))
-                    .def("__init__", p::make_constructor(&Vector6d_ConstructorWrapper_default))
+                    .def("__init__", p::make_constructor(&ConstructorWrapper_values<Eigen::Vector6d,double,double,double,double,double,double>))
+                    .def("__init__", p::make_constructor(&Vector_ConstructorWrapper_default<Eigen::Vector6d>))
                     .def("norm", &Eigen::Vector6d::norm)
                     .def("normalize", &Eigen::Vector6d::normalize)
                     .def("columnList", &Vector_toList<Eigen::Vector6d>)
-                    .def("__iter__", p::range(&Vector_begin<Eigen::Vector6d>,&Vector_end<Eigen::Vector6d>))
-                    .def("toNumpy", &Vector6d_toNPArray)
+                    .def("__iter__", p::range(&Vector_begin<Eigen::Vector6d>, &Vector_end<Eigen::Vector6d>))
+                    .def("toNumpy", &Vector_toNPArray<Eigen::Vector6d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector6d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector6d>)
-                    ;
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector6d>);
+
+
+            p::class_<Eigen::Vector4d, std::shared_ptr<Eigen::Vector4d>>("Vector4d", p::no_init)
+                    // Some magic is required to implement the constructor as a wrapper (because Eigen doesn't define it)
+                    .def("__init__", p::make_constructor(&ConstructorWrapper_values<Eigen::Vector4d,double,double,double,double>))
+                    .def("__init__", p::make_constructor(&Vector_ConstructorWrapper_default<Eigen::Vector4d>))
+                    .def("norm", &Eigen::Vector4d::norm)
+                    .def("normalize", &Eigen::Vector4d::normalize)
+                    .def("columnList", &Vector_toList<Eigen::Vector4d>)
+                    .def("__iter__", p::range(&Vector_begin<Eigen::Vector4d>, &Vector_end<Eigen::Vector4d>))
+                    .def("toNumpy", &Vector_toNPArray<Eigen::Vector4d>)
+                    .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector4d>)
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector4d>);
         }
 
     }
