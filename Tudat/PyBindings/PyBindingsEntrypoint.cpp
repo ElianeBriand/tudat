@@ -15,6 +15,7 @@ namespace p = boost::python;
 namespace np = boost::numpy;
 
 #include "WrapperCode/DataStructures/eigenWrapper.h"
+#include "WrapperCode/DataStructures/DataStructuresUtility.h"
 #include "WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.h"
 #include "WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.h"
 #include "WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
@@ -27,11 +28,10 @@ BOOST_PYTHON_MODULE (Tudat) {
     //Py_Initialize();
     np::initialize();
 
-    p::docstring_options doc_options(true, true, true);
 
     tudat::PyBindings_internal::PyExport_EigenDatastructures();
     tudat::PyBindings_internal::PyExport_unitConversions();
     tudat::PyBindings_internal::PyExport_physicalConstants();
     tudat::PyBindings_internal::PyExport_astrodynamicsFunctions();
-
+    tudat::PyBindings_internal::PyExport_DatastructuresUtility();
 }

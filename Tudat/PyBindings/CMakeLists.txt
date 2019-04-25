@@ -16,7 +16,7 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.cpp"
-
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/DataStructuresUtility.cpp"
         )
 
 # Set the header files.
@@ -25,8 +25,8 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
-
-         )
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/DataStructuresUtility.h"
+        )
 
 
 macro(setup_pymodule_target target_name)
