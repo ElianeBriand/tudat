@@ -13,19 +13,23 @@
 set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/PyBindingsEntrypoint.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/DataStructuresUtility.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.cpp"
+
         )
 
 # Set the header files.
 set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/DataStructuresUtility.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.h"
+
         )
 
 
