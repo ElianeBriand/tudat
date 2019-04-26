@@ -2,7 +2,6 @@ import PyTudat as ptd
 import numpy as np
 import random
 
-
 #
 # This is the tudat example application, in Python
 #
@@ -17,16 +16,13 @@ positionAttractedBody = ptd.Vector3d(1737.1e3 + altitude_m, 0.0, 0.0)
 
 positionAttractingBody = ptd.Vector3d.Zero()
 
+gravitationalAcceleration = ptd.CentralGravity.computeGravitationalAcceleration(
+    positionAttractedBody, 4.9e12,
+    positionAttractingBody)
 
-v = ptd.Vector3d()
-v.x = 1
-v.y = 2.0
-v.z = 3.2
-print("x = {0} y = {1} z = {2}".format(v.x,v.y,v.z))
-
-
-for i,val in enumerate(v):
-    print("v[{0}] = {1}".format(i,val))
+print("")
 
 
-
+print("Hello world!")
+print("I am floating {0} km above the Moon's surface.".format(altitude_km))
+print("The gravitational acceleration here is {0}".format(gravitationalAcceleration.norm()))

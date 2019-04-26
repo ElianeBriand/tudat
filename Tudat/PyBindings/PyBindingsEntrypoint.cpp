@@ -15,10 +15,13 @@ namespace p = boost::python;
 namespace np = boost::numpy;
 
 #include "WrapperCode/DataStructures/eigenWrapper.h"
-#include "WrapperCode/DataStructures/DataStructuresUtility.h"
-#include "WrapperCode/Astodynamics/BasicAstrodynamics/unitConversions.h"
-#include "WrapperCode/Astodynamics/BasicAstrodynamics/physicalConstants.h"
-#include "WrapperCode/Astodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+#include "WrapperCode/DataStructures/dataStructuresUtility.h"
+
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+
+#include "WrapperCode/Gravitation/centralGravityModel.h"
 
 #include "Tudat/Basics/basicTypedefs.h"
 
@@ -30,8 +33,11 @@ BOOST_PYTHON_MODULE (Tudat) {
 
 
     tudat::PyBindings_internal::PyExport_EigenDatastructures();
+    tudat::PyBindings_internal::PyExport_DatastructuresUtility();
+
     tudat::PyBindings_internal::PyExport_unitConversions();
     tudat::PyBindings_internal::PyExport_physicalConstants();
     tudat::PyBindings_internal::PyExport_astrodynamicsFunctions();
-    tudat::PyBindings_internal::PyExport_DatastructuresUtility();
+
+    tudat::PyBindings_internal::PyExport_centralGravityModel();
 }

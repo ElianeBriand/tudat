@@ -43,28 +43,201 @@
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 <span class="target" id="module-Tudat"></span><dl class="class">
+<dt id="Tudat.CentralGravity">
+<em class="property">class </em><code class="descclassname">Tudat.</code><code class="descname">CentralGravity</code><a class="headerlink" href="#Tudat.CentralGravity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
+<dl class="class">
+<dt id="Tudat.CentralGravity.StateFunctionHolder">
+<em class="property">class </em><code class="descname">StateFunctionHolder</code><a class="headerlink" href="#Tudat.CentralGravity.StateFunctionHolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tudat.CentralGravity.computeGravitationalAcceleration">
+<code class="descname">computeGravitationalAcceleration</code><span class="sig-paren">(</span><em>(object)universalGravitationalConstant</em>, <em>(Vector3d)positionOfBodySubjectToAcceleration</em>, <em>(object)massOfBodyExertingAcceleration</em>, <em>(Vector3d)positionOfBodyExertingAcceleration</em><span class="sig-paren">)</span> &#x2192; Vector3d :<a class="headerlink" href="#Tudat.CentralGravity.computeGravitationalAcceleration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes gravitational acceleration experienced by body1, due to its interaction with body2.</p>
+<blockquote>
+<div><p>The basis for this gravitational acceleration is that body2 is a point mass,
+generating acceleration due to Newton’s gravitational force:</p>
+<div class="math notranslate nohighlight">
+\[\bar{a}_{gravity} = -\frac{G * m_{2}}{r_{12}^{3}} * \bar{r}_{12}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G\)</span> is the universal gravitational constant, <span class="math notranslate nohighlight">\(m_{2}\)</span> is the mass of body2,
+and <span class="math notranslate nohighlight">\(\bar{r}_{12}\)</span> is the relative position vector from body1 to body 2, with respect to an
+inertial (barycentric) reference frame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param universalGravitationalConstant:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Universal gravitational constant [m^3 kg^-1 s^-2].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param positionOfBodySubjectToAcceleration:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Position vector of body subject to acceleration (body1) [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param massOfBodyExertingAcceleration:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Mass of body exerting acceleration (body2) [kg].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param positionOfBodyExertingAcceleration:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Position vector of body exerting acceleration (body2) [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Gravitational acceleration exerted on body1 [m s^-2].</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; computeGravitationalAcceleration(double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;,double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>computeGravitationalAcceleration( (Vector3d)positionOfBodySubjectToAcceleration, (object)gravitationalParameterOfBodyExertingAcceleration, (Vector3d)positionOfBodyExertingAcceleration) -&gt; Vector3d :</dt>
+<dd><p class="first">Computes gravitational acceleration experienced by body1, due to its interaction with body2.</p>
+<p>The basis for this gravitational acceleration is that body2 is a point mass, generating acceleration due to Newton’s gravitational force:</p>
+<div class="math notranslate nohighlight">
+\[\bar{a}_{gravity} = -\frac{\mu_{2}}{r_{12}^{3}} * \bar{r}_{12}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_{2}\)</span> is the gravitational parameter of the body exerting acceleration, and <span class="math notranslate nohighlight">\(\bar{r}_{12}\)</span> is the relative position vector from body1 to body 2, with respect to an inertial (barycentric) reference frame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param positionOfBodySubjectToAcceleration:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Position vector of body subject to acceleration (body1) [m].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param gravitationalParameterOfBodyExertingAcceleration:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Gravitational parameter of body exerting acceleration (body2) [m^3 s^-2].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param positionOfBodyExertingAcceleration:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Position vector of body exerting acceleration (body2) [m].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Gravitational acceleration exerted on body1 [m s^-2].</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; computeGravitationalAcceleration(Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;,double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tudat.CentralGravity.computeGravitationalForce">
+<code class="descname">computeGravitationalForce</code><span class="sig-paren">(</span><em>(object)universalGravitationalParameter</em>, <em>(object)massOfBodySubjectToForce</em>, <em>(Vector3d)positionOfBodySubjectToForce</em>, <em>(object)massOfBodyExertingForce</em>, <em>(Vector3d)positionOfBodyExertingForce</em><span class="sig-paren">)</span> &#x2192; Vector3d :<a class="headerlink" href="#Tudat.CentralGravity.computeGravitationalForce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes gravitational force experienced by body1, due to its interaction with body2.</p>
+<blockquote>
+<div><p>The basis for this gravitational force is that both body1 and body2 are point masses, generating Newton’s gravitational force:</p>
+<div class="math notranslate nohighlight">
+\[\bar{F}_{gravity} = -\frac{G * m_{1} * m_{2}}{r_{12}^{3}} * \bar{r}_{12}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G\)</span> is the universal gravitational constant, <span class="math notranslate nohighlight">\(m_{1}\)</span> is the mass of body1,
+<span class="math notranslate nohighlight">\(m_{2}\)</span> is the mass of body2, and <span class="math notranslate nohighlight">\(\bar{r}_{12}\)</span> is the relative position vector
+from body1 to body 2, with respect to an inertial (barycentric) reference frame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param universalGravitationalParameter:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Universal gravitational constant [m^3 kg^-1 s^-2].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param massOfBodySubjectToForce:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Mass of body subject to force (body1) [kg].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param positionOfBodySubjectToForce:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Position vector of body subject to force (body1) [m].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param massOfBodyExertingForce:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Mass of body exerting force (body2) [kg].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param positionOfBodyExertingForce:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Position vector of body exerting force (body2) [m].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Gravitational force exerted on body1 [N].</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; computeGravitationalForce(double,double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;,double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>computeGravitationalForce( (object)massOfBodySubjectToForce, (Vector3d)positionOfBodySubjectToForce, (object)massOfBodyExertingForce, (Vector3d)positionOfBodyExertingForce) -&gt; Vector3d :</dt>
+<dd><p class="first">Computes gravitational force experienced by body1, due to its interaction with body2.</p>
+<p>The basis for this gravitational force is that both body1 and body2 are point masses, generating Newton’s gravitational force:</p>
+<div class="math notranslate nohighlight">
+\[\bar{F}_{gravity} = -\frac{G * m_{1} * m_{2}}{r_{12}^{3}} * \bar{r}_{12}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G\)</span> is the universal gravitational constant, <span class="math notranslate nohighlight">\(m_{1}\)</span> is the mass of body1,
+<span class="math notranslate nohighlight">\(m_{2}\)</span> is the mass of body2, and <span class="math notranslate nohighlight">\(\bar{r}_{12}\)</span> is the relative position vector
+from body1 to body 2, with respect to an inertial (barycentric) reference frame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param massOfBodySubjectToForce:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Mass of body subject to force (body1) [kg].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param positionOfBodySubjectToForce:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Position vector of body subject to force (body1) [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param massOfBodyExertingForce:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Mass of body exerting force (body2) [kg].</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param positionOfBodyExertingForce:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Position vector of body exerting force (body2) [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">Gravitational force exerted on body1 [N].</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; computeGravitationalForce(double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;,double,Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="Tudat.Vector3d">
 <em class="property">class </em><code class="descclassname">Tudat.</code><code class="descname">Vector3d</code><a class="headerlink" href="#Tudat.Vector3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
 <dl class="method">
 <dt id="Tudat.Vector3d.columnList">
-<code class="descname">columnList</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#Tudat.Vector3d.columnList" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">columnList</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; list :<a class="headerlink" href="#Tudat.Vector3d.columnList" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list columnList(Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;*)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector3d.norm">
-<code class="descname">norm</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.Vector3d.norm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">norm</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.Vector3d.norm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double norm(Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector3d.normalize">
-<code class="descname">normalize</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#Tudat.Vector3d.normalize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; None :<a class="headerlink" href="#Tudat.Vector3d.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void normalize(Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector3d.toNumpy">
-<code class="descname">toNumpy</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#Tudat.Vector3d.toNumpy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">toNumpy</code><span class="sig-paren">(</span><em>(Vector3d)arg1</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray :<a class="headerlink" href="#Tudat.Vector3d.toNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::numpy::ndarray toNumpy(Eigen::Matrix&lt;double, 3, 1, 0, 3, 1&gt;*)</dd>
+</dl>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="Tudat.Vector3d.x">
@@ -84,28 +257,86 @@
 </dd></dl>
 
 <dl class="class">
+<dt id="Tudat.Vector4d">
+<em class="property">class </em><code class="descclassname">Tudat.</code><code class="descname">Vector4d</code><a class="headerlink" href="#Tudat.Vector4d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
+<dl class="method">
+<dt id="Tudat.Vector4d.columnList">
+<code class="descname">columnList</code><span class="sig-paren">(</span><em>(Vector4d)arg1</em><span class="sig-paren">)</span> &#x2192; list :<a class="headerlink" href="#Tudat.Vector4d.columnList" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list columnList(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;*)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tudat.Vector4d.norm">
+<code class="descname">norm</code><span class="sig-paren">(</span><em>(Vector4d)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.Vector4d.norm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double norm(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tudat.Vector4d.normalize">
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>(Vector4d)arg1</em><span class="sig-paren">)</span> &#x2192; None :<a class="headerlink" href="#Tudat.Vector4d.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void normalize(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Tudat.Vector4d.toNumpy">
+<code class="descname">toNumpy</code><span class="sig-paren">(</span><em>(Vector4d)arg1</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray :<a class="headerlink" href="#Tudat.Vector4d.toNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::numpy::ndarray toNumpy(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;*)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="Tudat.Vector6d">
 <em class="property">class </em><code class="descclassname">Tudat.</code><code class="descname">Vector6d</code><a class="headerlink" href="#Tudat.Vector6d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
 <dl class="method">
 <dt id="Tudat.Vector6d.columnList">
-<code class="descname">columnList</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#Tudat.Vector6d.columnList" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">columnList</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; list :<a class="headerlink" href="#Tudat.Vector6d.columnList" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list columnList(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;*)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector6d.norm">
-<code class="descname">norm</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.Vector6d.norm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">norm</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.Vector6d.norm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double norm(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector6d.normalize">
-<code class="descname">normalize</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#Tudat.Vector6d.normalize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; None :<a class="headerlink" href="#Tudat.Vector6d.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void normalize(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt; {lvalue})</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.Vector6d.toNumpy">
-<code class="descname">toNumpy</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#Tudat.Vector6d.toNumpy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">toNumpy</code><span class="sig-paren">(</span><em>(Vector6d)arg1</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray :<a class="headerlink" href="#Tudat.Vector6d.toNumpy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::numpy::ndarray toNumpy(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;*)</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -118,12 +349,28 @@
 <code class="descname">computeKeplerAngularMomentum</code><span class="sig-paren">(</span><em>(object)semiMajorAxis</em>, <em>(object)eccentricity</em>, <em>(object)gravitationalParameterOfCentralBody</em><span class="optional">[</span>, <em>(object)massOfOrbitingBody=0.0</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeKeplerAngularMomentum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the angular momentum of an orbiting body that follows a conic section (Kepler orbit),
 relative to the center-of-mass of the central body. The default mass value is for the angular
-momentum per unit mass.
-:param semiMajorAxis Semi-major axis of Kepler orbit.
-:param eccentricity Eccentricity of Kepler orbit.
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Two-body angular momentum.</p>
+momentum per unit mass.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>semiMajorAxis</strong> – Semi-major axis of Kepler orbit.</li>
+<li><strong>eccentricity</strong> – Eccentricity of Kepler orbit.</li>
+<li><strong>gravitationalParameterOfCentralBody</strong> – Gravitational parameter of central body.</li>
+<li><strong>massOfOrbitingBody</strong> – Mass of orbiting body.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Two-body angular momentum.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerAngularMomentum(double,double,double [,double=0.0])</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -132,99 +379,266 @@ momentum per unit mass.
 <dd><p>Computes the energy of an orbiting body that follows a conic section (Kepler orbit). The
 default mass value is for the two-body orbital energy per unit mass. For closed conic sections
 (circles, ellipses), the semi-major axis is positive, and for open sections (hyperbolas) the
-semi-major axis is negative.
-:param semiMajorAxis Semi-major axis of Kepler orbit.
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Kepler orbital energy.</p>
+semi-major axis is negative.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>semiMajorAxis</strong> – Semi-major axis of Kepler orbit.</li>
+<li><strong>gravitationalParameterOfCentralBody</strong> – Gravitational parameter of central body.</li>
+<li><strong>massOfOrbitingBody</strong> – Mass of orbiting body.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Kepler orbital energy.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerEnergy(double,double [,double=1.0])</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computeKeplerMeanMotion">
 <code class="descname">computeKeplerMeanMotion</code><span class="sig-paren">(</span><em>(object)semiMajorAxis</em>, <em>(object)gravitationalParameterOfCentralBody</em><span class="optional">[</span>, <em>(object)massOfOrbitingBody=0.0</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeKeplerMeanMotion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the two-body mean motion of an orbiting body that follows a conic section
-(Kepler orbit). The mass of the orbiting body is set to that of a test particle by default.
-:param semiMajorAxis Semi-major axis of Kepler orbit.
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Two-body mean motion.</p>
+(Kepler orbit). The mass of the orbiting body is set to that of a test particle by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>semiMajorAxis</strong> – Semi-major axis of Kepler orbit.</li>
+<li><strong>gravitationalParameterOfCentralBody</strong> – Gravitational parameter of central body.</li>
+<li><strong>massOfOrbitingBody</strong> – Mass of orbiting body.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Two-body mean motion.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerMeanMotion(double,double [,double=0.0])</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computeKeplerOrbitalPeriod">
 <code class="descname">computeKeplerOrbitalPeriod</code><span class="sig-paren">(</span><em>(object)semiMajorAxis</em>, <em>(object)gravitationalParameterOfCentralBody</em><span class="optional">[</span>, <em>(object)massOfOrbitingBody=0.0</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeKeplerOrbitalPeriod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the two-body orbital period of an orbiting body that follows a closed conic section
-(circle or ellipse Kepler orbit). The mass of the orbiting body is set to that of a test
-particle by default.
-:param semiMajorAxis Semi-major axis of Kepler orbit (circle or ellipse).
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Two-body orbital period.</p>
+(circle or ellipse Kepler orbit).</p>
+<blockquote>
+<div>The mass of the orbiting body is set to that of a test</div></blockquote>
+<p>particle by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>semiMajorAxis</strong> – Semi-major axis of Kepler orbit (circle or ellipse).</li>
+<li><strong>gravitationalParameterOfCentralBody</strong> – Gravitational parameter of central body.</li>
+<li><strong>massOfOrbitingBody</strong> – Mass of orbiting body.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Two-body orbital period.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerOrbitalPeriod(double,double [,double=0.0])</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computeKeplerOrbitalVelocity">
 <code class="descname">computeKeplerOrbitalVelocity</code><span class="sig-paren">(</span><em>(object)semiMajorAxis</em>, <em>(object)eccentricity</em>, <em>(object)trueAnomaly</em>, <em>(object)gravitationalParameterOfCentralBody</em><span class="optional">[</span>, <em>(object)massOfOrbitingBody=0.0</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeKeplerOrbitalVelocity" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Compute two-body orbital velocity with vis-viva equation.</dt>
-<dd>:param semiMajorAxis Semi-major axis of Kepler orbit (circle or ellipse).
-:param eccentricity Eccentricity of Kepler orbit (circle or ellipse).
-:param trueAnomaly True anomaly of Kepler orbit (circle or ellipse).
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Two-body orbital velocity at current conditions.</dd>
+<dd><p>Compute two-body orbital velocity with vis-viva equation.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param semiMajorAxis:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Semi-major axis of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param eccentricity:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Eccentricity of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param trueAnomaly:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">True anomaly of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param gravitationalParameterOfCentralBody:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Gravitational parameter of central body.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param massOfOrbitingBody:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Mass of orbiting body.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Two-body orbital velocity at current conditions.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerOrbitalVelocity(double,double,double,double [,double=0.0])</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
 <dt>computeKeplerOrbitalVelocity( (Vector6d)keplerianElements, (object)gravitationalParameterOfCentralBody [, (object)massOfOrbitingBody=0.0]) -&gt; float :</dt>
-<dd>Compute two-body orbital velocity with vis-viva equation.
-:param keplerianElements Vector denoting the Keplerian elements (circle or ellipse).
-:param gravitationalParameterOfCentralBody Gravitational parameter of central body.
-:param massOfOrbitingBody Mass of orbiting body.
-:returns: Two-body orbital velocity at current conditions.</dd>
+<dd><p class="first">Compute two-body orbital velocity with vis-viva equation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param keplerianElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector denoting the Keplerian elements (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param gravitationalParameterOfCentralBody:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Gravitational parameter of central body.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param massOfOrbitingBody:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Mass of orbiting body.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Two-body orbital velocity at current conditions.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerOrbitalVelocity(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;,double [,double=0.0])</dd>
+</dl>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computeKeplerRadialDistance">
 <code class="descname">computeKeplerRadialDistance</code><span class="sig-paren">(</span><em>(object)semiMajorAxis</em>, <em>(object)eccentricity</em>, <em>(object)trueAnomaly</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeKeplerRadialDistance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Compute two-body radial distance.</dt>
-<dd>:param semiMajorAxis Semi-major axis of Kepler orbit (circle or ellipse).
-:param eccentricity Eccentricity of Kepler orbit (circle or ellipse).
-:param trueAnomaly True anomaly of Kepler orbit (circle or ellipse).
-:returns: Two-body radial distance at specified true anomaly.</dd>
+<dd><p>Compute two-body radial distance.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param semiMajorAxis:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Semi-major axis of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param eccentricity:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Eccentricity of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">param trueAnomaly:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">True anomaly of Kepler orbit (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Two-body radial distance at specified true anomaly.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerRadialDistance(double,double,double)</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
 <dt>computeKeplerRadialDistance( (Vector6d)keplerianElements) -&gt; float :</dt>
-<dd>Compute two-body radial distance.
-:param keplerianElements Vector denoting the Keplerian elements (circle or ellipse).
-:returns: Two-body radial distance at specified true anomaly.</dd>
+<dd><p class="first">Compute two-body radial distance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param keplerianElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector denoting the Keplerian elements (circle or ellipse).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">Two-body radial distance at specified true anomaly.</td>
+</tr>
+</tbody>
+</table>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>double computeKeplerRadialDistance(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;)</dd>
+</dl>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computePeriapsisAltitudeFromCartesianState">
 <code class="descname">computePeriapsisAltitudeFromCartesianState</code><span class="sig-paren">(</span><em>(Vector6d)state</em>, <em>(object)centralBodyGravitationalParameter</em>, <em>(object)centralBodyRadius</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computePeriapsisAltitudeFromCartesianState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute periapsis altitude from Cartesian state for spherical central body.
-:param state Cartesian state of the propagated body.
-:param centralBodyGravitationalParameter Gravitational parameter of the central body.
-:param centralBodyRadius Radius of the central body (assumed spherical).
-:returns: The distance from the propagated body to the central body’s spherical surface at periapsis.</p>
+<dd><p>Compute periapsis altitude from Cartesian state for spherical central body.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>state</strong> – Cartesian state of the propagated body.</li>
+<li><strong>centralBodyGravitationalParameter</strong> – Gravitational parameter of the central body.</li>
+<li><strong>centralBodyRadius</strong> – Radius of the central body (assumed spherical).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The distance from the propagated body to the central body’s spherical surface at periapsis.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computePeriapsisAltitudeFromCartesianState(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;,double,double)</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computePeriapsisAltitudeFromKeplerianState">
 <code class="descname">computePeriapsisAltitudeFromKeplerianState</code><span class="sig-paren">(</span><em>(Vector6d)state</em>, <em>(object)centralBodyRadius</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computePeriapsisAltitudeFromKeplerianState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute periapsis altitude from Keplerian state for spherical central body.
-:param state Keplerian state of the propagated body.
-:param centralBodyRadius Radius of the central body (assumed spherical).
-:returns: The distance from the propagated body to the central body’s spherical surface at periapsis.</p>
+:param state: Keplerian state of the propagated body.
+:param centralBodyRadius: Radius of the central body (assumed spherical).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The distance from the propagated body to the central body’s spherical surface at periapsis.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computePeriapsisAltitudeFromKeplerianState(Eigen::Matrix&lt;double, 6, 1, 0, 6, 1&gt;,double)</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="Tudat.astrodynamics.computeSynodicPeriod">
 <code class="descname">computeSynodicPeriod</code><span class="sig-paren">(</span><em>(object)orbitalPeriodBody1</em>, <em>(object)orbitalPeriodBody2</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.astrodynamics.computeSynodicPeriod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes synodic period between two bodies in different Kepler orbits (closed conic sections).
-The orbital periods must be positive values for the synodic period to be sensible.
-:param orbitalPeriodBody1 Orbital period of Body 1.
-:param orbitalPeriodBody2 Orbital period of Body 2.
-:returns: Synodic period.</p>
+The orbital periods must be positive values for the synodic period to be sensible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>orbitalPeriodBody1</strong> – Orbital period of Body 1.</li>
+<li><strong>orbitalPeriodBody2</strong> – Orbital period of Body 2.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Synodic period.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double computeSynodicPeriod(double,double)</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -355,124 +769,312 @@ The orbital periods must be positive values for the synodic period to be sensibl
 
 </dd></dl>
 
+<dl class="function">
+<dt id="Tudat.convertExponentialMapToQuaternionElements">
+<code class="descclassname">Tudat.</code><code class="descname">convertExponentialMapToQuaternionElements</code><span class="sig-paren">(</span><em>(Vector4d)exponentialMapElements</em><span class="sig-paren">)</span> &#x2192; Vector4d<a class="headerlink" href="#Tudat.convertExponentialMapToQuaternionElements" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert exponential map to quaternions. The conversion is the same for both exponential map (EM) and shadow
+exponential map (SEM).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param exponentialMapElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector of (shadow) exponential map elements.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">convertedQuaternionElements Vector of quaternion elements.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; convertExponentialMapToQuaternionElements(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="Tudat.convertModifiedRodriguesParametersToQuaternionElements">
+<code class="descclassname">Tudat.</code><code class="descname">convertModifiedRodriguesParametersToQuaternionElements</code><span class="sig-paren">(</span><em>(Vector4d)modifiedRodriguesParameterElements</em><span class="sig-paren">)</span> &#x2192; Vector4d<a class="headerlink" href="#Tudat.convertModifiedRodriguesParametersToQuaternionElements" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert modified Rodrigues parameters to quaternions. The conversion is slightly different for modified Rodrigues parameters (MRP)
+than for shadow modified Rodrigues parameters (SMRP). This difference is embodied by conversionSign.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param modifiedRodriguesParameterElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector of (shadow) modified Rodrigues parameters elements.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">convertedQuaternionElements Vector of quaternion elements.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; convertModifiedRodriguesParametersToQuaternionElements(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="Tudat.convertQuaternionsToExponentialMapElements">
+<code class="descclassname">Tudat.</code><code class="descname">convertQuaternionsToExponentialMapElements</code><span class="sig-paren">(</span><em>(Vector4d)quaternionElements</em><span class="sig-paren">)</span> &#x2192; Vector4d<a class="headerlink" href="#Tudat.convertQuaternionsToExponentialMapElements" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert quaternions to exponential map. The conversion is the same for both exponential map (EM) and shadow
+exponential map (SEM).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param quaternionElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector of quaternion elements.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">convertedExponentialMapElements Vector of (shadow) exponential map elements.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; convertQuaternionsToExponentialMapElements(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="Tudat.convertQuaternionsToModifiedRodriguesParameterElements">
+<code class="descclassname">Tudat.</code><code class="descname">convertQuaternionsToModifiedRodriguesParameterElements</code><span class="sig-paren">(</span><em>(Vector4d)quaternionElements</em><span class="sig-paren">)</span> &#x2192; Vector4d<a class="headerlink" href="#Tudat.convertQuaternionsToModifiedRodriguesParameterElements" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert quaternions to modified Rodrigues parameters. The conversion is slightly different for modified Rodrigues parameters (MRP)
+than for shadow modified Rodrigues parameters (SMRP). This difference is embodied by conversionSign.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param quaternionElements:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Vector of quaternion elements.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">return:</th><td class="field-body">convertedModifiedRodriguesParameterElements Vector of (shadow) modified Rodrigues parameter elements.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt; convertQuaternionsToModifiedRodriguesParameterElements(Eigen::Matrix&lt;double, 4, 1, 0, 4, 1&gt;)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
 <dl class="class">
 <dt id="Tudat.units">
 <em class="property">class </em><code class="descclassname">Tudat.</code><code class="descname">units</code><a class="headerlink" href="#Tudat.units" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Boost.Python.instance</span></code></p>
 <dl class="method">
 <dt id="Tudat.units.convertArcSecondsToRadians">
-<code class="descname">convertArcSecondsToRadians</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertArcSecondsToRadians" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertArcSecondsToRadians</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertArcSecondsToRadians" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertArcSecondsToRadians(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertArcminutesToArcseconds">
-<code class="descname">convertArcminutesToArcseconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertArcminutesToArcseconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertArcminutesToArcseconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertArcminutesToArcseconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertArcminutesToArcseconds(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertAstronomicalUnitsToMeters">
-<code class="descname">convertAstronomicalUnitsToMeters</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertAstronomicalUnitsToMeters" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertAstronomicalUnitsToMeters</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertAstronomicalUnitsToMeters" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertAstronomicalUnitsToMeters(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertDegreesToArcminutes">
-<code class="descname">convertDegreesToArcminutes</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertDegreesToArcminutes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertDegreesToArcminutes</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertDegreesToArcminutes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertDegreesToArcminutes(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertDegreesToRadians">
-<code class="descname">convertDegreesToRadians</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertDegreesToRadians" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertDegreesToRadians</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertDegreesToRadians" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertDegreesToRadians(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertFeetToMeter">
-<code class="descname">convertFeetToMeter</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertFeetToMeter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertFeetToMeter</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertFeetToMeter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertFeetToMeter(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertHoursToSeconds">
-<code class="descname">convertHoursToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertHoursToSeconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertHoursToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertHoursToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertHoursToSeconds(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertJulianDaysToJulianYears">
-<code class="descname">convertJulianDaysToJulianYears</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertJulianDaysToJulianYears" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertJulianDaysToJulianYears</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertJulianDaysToJulianYears" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertJulianDaysToJulianYears(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertJulianDaysToSeconds">
-<code class="descname">convertJulianDaysToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertJulianDaysToSeconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertJulianDaysToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertJulianDaysToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertJulianDaysToSeconds(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertJulianYearsToJulianDays">
-<code class="descname">convertJulianYearsToJulianDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertJulianYearsToJulianDays" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertJulianYearsToJulianDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertJulianYearsToJulianDays" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertJulianYearsToJulianDays(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertKilometersToMeters">
-<code class="descname">convertKilometersToMeters</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertKilometersToMeters" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertKilometersToMeters</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertKilometersToMeters" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertKilometersToMeters(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertMetersToAstronomicalUnits">
-<code class="descname">convertMetersToAstronomicalUnits</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertMetersToAstronomicalUnits" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertMetersToAstronomicalUnits</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertMetersToAstronomicalUnits" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertMetersToAstronomicalUnits(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertMetersToKilometers">
-<code class="descname">convertMetersToKilometers</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertMetersToKilometers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertMetersToKilometers</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertMetersToKilometers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertMetersToKilometers(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertMinutesToSeconds">
-<code class="descname">convertMinutesToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertMinutesToSeconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertMinutesToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertMinutesToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertMinutesToSeconds(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertPoundPerSquareFeetToPascal">
-<code class="descname">convertPoundPerSquareFeetToPascal</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertPoundPerSquareFeetToPascal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertPoundPerSquareFeetToPascal</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertPoundPerSquareFeetToPascal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertPoundPerSquareFeetToPascal(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertRadiansToArcSeconds">
-<code class="descname">convertRadiansToArcSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertRadiansToArcSeconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertRadiansToArcSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertRadiansToArcSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertRadiansToArcSeconds(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertRadiansToDegrees">
-<code class="descname">convertRadiansToDegrees</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertRadiansToDegrees" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertRadiansToDegrees</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertRadiansToDegrees" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertRadiansToDegrees(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertRankineToKelvin">
-<code class="descname">convertRankineToKelvin</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertRankineToKelvin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertRankineToKelvin</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertRankineToKelvin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertRankineToKelvin(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertSecondsToHours">
-<code class="descname">convertSecondsToHours</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertSecondsToHours" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertSecondsToHours</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertSecondsToHours" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertSecondsToHours(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertSecondsToJulianDays">
-<code class="descname">convertSecondsToJulianDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertSecondsToJulianDays" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertSecondsToJulianDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertSecondsToJulianDays" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertSecondsToJulianDays(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertSecondsToMinutes">
-<code class="descname">convertSecondsToMinutes</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertSecondsToMinutes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertSecondsToMinutes</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertSecondsToMinutes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertSecondsToMinutes(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertSecondsToSiderealDays">
-<code class="descname">convertSecondsToSiderealDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertSecondsToSiderealDays" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertSecondsToSiderealDays</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertSecondsToSiderealDays" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertSecondsToSiderealDays(double)</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Tudat.units.convertSiderealDaysToSeconds">
-<code class="descname">convertSiderealDaysToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#Tudat.units.convertSiderealDaysToSeconds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">convertSiderealDaysToSeconds</code><span class="sig-paren">(</span><em>(object)arg1</em><span class="sig-paren">)</span> &#x2192; float :<a class="headerlink" href="#Tudat.units.convertSiderealDaysToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>double convertSiderealDaysToSeconds(double)</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
