@@ -193,15 +193,18 @@ namespace tudat {
 
         /* Helper class for C++11 equivalent to fold expressions "... && <condition>" */
         // TODO : Create and transfer into TemplateMagic.h if needed elsewhere
-        template <bool... B>
-        struct conjunction {};
+        template<bool... B>
+        struct conjunction {
+        };
 
-        template <bool Head, bool... Tail>
+        template<bool Head, bool... Tail>
         struct conjunction<Head, Tail...>
-                : std::integral_constant<bool, Head && conjunction<Tail...>::value>{};
+                : std::integral_constant<bool, Head && conjunction<Tail...>::value> {
+        };
 
-        template <bool B>
-        struct conjunction<B> : std::integral_constant<bool, B> {};
+        template<bool B>
+        struct conjunction<B> : std::integral_constant<bool, B> {
+        };
 
 
         /** As a way to create python constructors, fills a VectorNd with N elements provided as arguments.
@@ -252,7 +255,6 @@ namespace tudat {
         }
 
 
-
         void PyExport_EigenDatastructures() {
 
 
@@ -275,7 +277,8 @@ namespace tudat {
 
             p::class_<Eigen::Vector6d, std::shared_ptr<Eigen::Vector6d>>("Vector6d", p::no_init)
                     // Some magic is required to implement the constructor as a wrapper (because Eigen doesn't define it)
-                    .def("__init__", p::make_constructor(&ConstructorWrapper_values<Eigen::Vector6d,double,double,double,double,double,double>))
+                    .def("__init__", p::make_constructor(
+                            &ConstructorWrapper_values<Eigen::Vector6d, double, double, double, double, double, double>))
                     .def("__init__", p::make_constructor(&Vector_ConstructorWrapper_default<Eigen::Vector6d>))
                     .def("norm", &Eigen::Vector6d::norm)
                     .def("normalize", &Eigen::Vector6d::normalize)
@@ -288,7 +291,8 @@ namespace tudat {
 
             p::class_<Eigen::Vector4d, std::shared_ptr<Eigen::Vector4d>>("Vector4d", p::no_init)
                     // Some magic is required to implement the constructor as a wrapper (because Eigen doesn't define it)
-                    .def("__init__", p::make_constructor(&ConstructorWrapper_values<Eigen::Vector4d,double,double,double,double>))
+                    .def("__init__", p::make_constructor(
+                            &ConstructorWrapper_values<Eigen::Vector4d, double, double, double, double>))
                     .def("__init__", p::make_constructor(&Vector_ConstructorWrapper_default<Eigen::Vector4d>))
                     .def("norm", &Eigen::Vector4d::norm)
                     .def("normalize", &Eigen::Vector4d::normalize)

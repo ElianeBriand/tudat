@@ -135,7 +135,7 @@ namespace tudat {
                    ":return: Gravitational force exerted on body1 [N]."
             );
 
-            p::class_<std::function< Eigen::Vector3d( ) >>("StateFunctionHolder");
+            p::class_<std::function<Eigen::Vector3d() >>("StateFunctionHolder");
 
 
             // The templated nature of the constructor is somewhat problematic

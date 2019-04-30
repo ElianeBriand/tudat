@@ -23,8 +23,9 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
         earthGravitationalParameter = ptd.constants.GRAVITATIONAL_CONSTANT * 5.9736e24
         distanceBetweenSatelliteAndEarth = 4.2164e7
 
-        orbitalPeriod = ptd.astrodynamics.computeKeplerOrbitalPeriod(distanceBetweenSatelliteAndEarth, earthGravitationalParameter,
-                                                       satelliteMass)
+        orbitalPeriod = ptd.astrodynamics.computeKeplerOrbitalPeriod(distanceBetweenSatelliteAndEarth,
+                                                                     earthGravitationalParameter,
+                                                                     satelliteMass)
 
         expectedOrbitalPeriod = 86164.09054
 
@@ -35,8 +36,8 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
 
     def test_KeplerRadialDistance(self):
         radialDistance1 = ptd.astrodynamics.computeKeplerRadialDistance(self.keplerianElements[0],
-                                                          self.keplerianElements[1],
-                                                          self.keplerianElements[5])
+                                                                        self.keplerianElements[1],
+                                                                        self.keplerianElements[5])
         radialDistance2 = ptd.astrodynamics.computeKeplerRadialDistance(self.keplerianElements)
 
         expectedRadialDistance = 4032815.56442827

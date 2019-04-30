@@ -22,7 +22,6 @@ gravitationalAcceleration = ptd.CentralGravity.computeGravitationalAcceleration(
 
 print("")
 
-
 print("Hello world!")
 print("I am floating {0} km above the Moon's surface.".format(altitude_km))
 print("The gravitational acceleration here is {0}".format(gravitationalAcceleration.norm()))

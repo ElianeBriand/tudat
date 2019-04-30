@@ -29,17 +29,15 @@ class TestCentralGravityModels(unittest.TestCase):
 
         massOfMoon = 7.36e22
 
-        positionOfMoon = ptd.Vector3d ( 12.65, 0.23, -45.78 )
+        positionOfMoon = ptd.Vector3d(12.65, 0.23, -45.78)
 
-        positionOfLunarSurface = ptd.Vector3d ( 0.0, 1735771.89, 0.0 )
+        positionOfLunarSurface = ptd.Vector3d(0.0, 1735771.89, 0.0)
 
         gravitationalAccelerationExertedAtLunarSurface = ptd.CentralGravity.computeGravitationalAcceleration(
             universalGravitationalConstant, positionOfLunarSurface,
-            massOfMoon, positionOfMoon )
-
+            massOfMoon, positionOfMoon)
 
         self.assertAlmostEqual(
             gravitationalAccelerationExertedAtLunarSurface.norm() / 1.63,
             1.0,
             places=6)
-

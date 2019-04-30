@@ -4,7 +4,8 @@ import PyTudat as ptd
 import numpy as np
 import math
 
-floatingPointPlaceTolerance = 7 # Assert check to 7 decimal places
+floatingPointPlaceTolerance = 7  # Assert check to 7 decimal places
+
 
 class TestEigenStructures_Vector3d(unittest.TestCase):
 
@@ -14,8 +15,8 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
         v1.y = 2.0
         v1.z = 3.1
 
-        v2 = ptd.Vector3d(1,2,3)
-        v3 = ptd.Vector3d(1,2,3.1)
+        v2 = ptd.Vector3d(1, 2, 3)
+        v3 = ptd.Vector3d(1, 2, 3.1)
 
         self.assertEqual(v3, v1)
         self.assertFalse(v1 == v2)
@@ -28,7 +29,7 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
         self.assertEqual(v3.z, 3.1)
 
     def test_Vector3d_Indexing(self):
-        v3 = ptd.Vector3d(1,-2,3.1)
+        v3 = ptd.Vector3d(1, -2, 3.1)
 
         self.assertEqual(v3[0], 1.0)
         self.assertEqual(v3[1], -2.0)
@@ -39,7 +40,7 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
             a = v3[3]
 
         def test_Vector3d_Indexing(self):
-            v3 = ptd.Vector3d(1,-2,3.1)
+            v3 = ptd.Vector3d(1, -2, 3.1)
 
         self.assertEqual(v3[0], 1.0)
         self.assertEqual(v3[1], -2.0)
@@ -48,7 +49,6 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
             v3[3] = 3
         with self.assertRaises(IndexError):
             a = v3[3]
-
 
     def test_Vector3d_Numpy(self):
         v = ptd.Vector3d(1.4, -2.1, 3.9)
@@ -60,15 +60,15 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
         self.assertTrue(np.allclose(vnp, refnp))
 
     def test_Vector3d_str(self):
-        v = ptd.Vector3d(1.4,-2.1,3.9)
+        v = ptd.Vector3d(1.4, -2.1, 3.9)
 
         refstr = "[ 1.4 -2.1 3.9 ]"
 
-        self.assertEqual(str(v),refstr)
+        self.assertEqual(str(v), refstr)
 
     def test_Vector3d_isIterable(self):
         # This is indirectly testing if vector3d is iterable (__iter__)
-        v = ptd.Vector3d(1.4,-2.1,3.9)
+        v = ptd.Vector3d(1.4, -2.1, 3.9)
 
         sum = 0.0
         for val in v:
@@ -76,20 +76,18 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
 
         refsum = 1.4 + -2.1 + 3.9
 
-        self.assertEqual(sum,refsum)
-
-
+        self.assertEqual(sum, refsum)
 
     def test_Vector3d_normalization(self):
-        v = ptd.Vector3d(1.4,-2.1,3.9)
+        v = ptd.Vector3d(1.4, -2.1, 3.9)
 
-        refnorm = math.sqrt(1.4**2 + (-2.1)**2 + 3.9**2)
+        refnorm = math.sqrt(1.4 ** 2 + (-2.1) ** 2 + 3.9 ** 2)
 
-        self.assertAlmostEqual(v.norm(),refnorm, places=floatingPointPlaceTolerance)
+        self.assertAlmostEqual(v.norm(), refnorm, places=floatingPointPlaceTolerance)
 
         v.normalize()
 
-        self.assertAlmostEqual(v.norm(),1.0, places=floatingPointPlaceTolerance)
+        self.assertAlmostEqual(v.norm(), 1.0, places=floatingPointPlaceTolerance)
 
     def test_Vector6d_ConstructionComparisonIndexing(self):
         v1 = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2, 3.1)
@@ -123,7 +121,6 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
 
     def test_Vector6d_Indexing(self):
         v1 = ptd.Vector6d(2.3, 0.0, -1.4, 1, 2, 3.1)
-
 
         self.assertEqual(v1[2], -1.4)
 
@@ -171,7 +168,6 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
 
     def test_Vector4d_Indexing(self):
         v1 = ptd.Vector4d(2.3, 0.0, -1.4, 1)
-
 
         self.assertEqual(v1[2], -1.4)
 

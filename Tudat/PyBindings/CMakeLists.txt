@@ -14,10 +14,11 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/PyBindingsEntrypoint.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/constants.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.cpp"
 
         )
 
@@ -25,18 +26,19 @@ set(PYBINDINGS_SOURCES
 set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/eigenWrapper.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/constants.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
 
         )
 
 
 macro(setup_pymodule_target target_name)
- set_property(TARGET ${target_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY "${BINROOT}")
- set_target_properties(${target_name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${BINROOT})
- install(TARGETS ${target_name} LIBRARY DESTINATION "${BINROOT}")
+    set_property(TARGET ${target_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY "${BINROOT}")
+    set_target_properties(${target_name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${BINROOT})
+    install(TARGETS ${target_name} LIBRARY DESTINATION "${BINROOT}")
 endmacro()
 
 add_library(PyBindings MODULE ${PYBINDINGS_HEADERS} ${PYBINDINGS_SOURCES})
@@ -45,8 +47,8 @@ set_target_properties(PyBindings PROPERTIES COMPILE_FLAGS " -fPIC ")
 set_target_properties(PyBindings PROPERTIES LINK_FLAGS " -shared -Wl,-Bshareable")
 set_target_properties(PyBindings PROPERTIES PREFIX "")
 set_target_properties(PyBindings PROPERTIES OUTPUT_NAME "Tudat")
-target_link_libraries(PyBindings tudat_gravitation  tudat_basic_astrodynamics)
-target_link_libraries(PyBindings -Wl,-Bshareable ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
+target_link_libraries(PyBindings tudat_gravitation tudat_basic_astrodynamics)
+target_link_libraries(PyBindings -Wl,-Bshareable ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 add_custom_command(
         TARGET PyBindings POST_BUILD

@@ -22,7 +22,7 @@ namespace {
     };
 }
 
-void tudat::PyBindings_internal::PyExport_unitConversions(){
+void tudat::PyBindings_internal::PyExport_unitConversions() {
 
     {
         p::scope engineScope
@@ -64,7 +64,8 @@ void tudat::PyBindings_internal::PyExport_unitConversions(){
 
         p::def("convertFeetToMeter", &tudat::unit_conversions::convertFeetToMeter<double>);
 
-        p::def("convertPoundPerSquareFeetToPascal", &tudat::unit_conversions::convertPoundPerSquareFeetToPascal<double>);
+        p::def("convertPoundPerSquareFeetToPascal",
+               &tudat::unit_conversions::convertPoundPerSquareFeetToPascal<double>);
 
     }
 

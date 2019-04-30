@@ -8,16 +8,16 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
-#ifndef TUDAT_PYBINDINGS_DATASTRUCTURESUTILITY_H
-#define TUDAT_PYBINDINGS_DATASTRUCTURESUTILITY_H
+#ifndef TUDAT_PYBINDINGS_CLOHESSYWILTSHIREPROPAGATOR_H
+#define TUDAT_PYBINDINGS_CLOHESSYWILTSHIREPROPAGATOR_H
+
 
 namespace tudat {
     namespace PyBindings_internal {
 
-        void PyExport_DatastructuresUtility();
+        void PyExport_clohessyWiltshirePropagator();
 
     }
 }
 
-
-#endif //TUDAT_PYBINDINGS_DATASTRUCTURESUTILITY_H
+#endif //TUDAT_PYBINDINGS_CLOHESSYWILTSHIREPROPAGATOR_H

@@ -82,7 +82,7 @@ class TestPhysicalConstants(unittest.TestCase):
 
         self.assertAlmostEqual(
             ptd.constants.VACUUM_PERMITTIVITY,
-            1/(4.0 * math.pi * 1.0E-7 * math.pow(ptd.constants.SPEED_OF_LIGHT, 2.0)),
+            1 / (4.0 * math.pi * 1.0E-7 * math.pow(ptd.constants.SPEED_OF_LIGHT, 2.0)),
             places=floatingPointPlaceTolerance)
 
         self.assertAlmostEqual(
@@ -123,4 +123,64 @@ class TestPhysicalConstants(unittest.TestCase):
         self.assertAlmostEqual(
             ptd.constants.JULIAN_DAY_IN_SECONDS,
             86400.0,
+            places=floatingPointPlaceTolerance)
+
+    def test_GravitationalParameters(self):
+        self.assertAlmostEqual(
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER,
+            1.32712440018e20,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.MERCURY_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER / 6023600.0,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.VENUS_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER / 408523.71,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.EARTH_GRAVITATIONAL_PARAMETER,
+            3.986004418e14,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.MOON_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / (328900.56 * (1.0 + 81.30059)),
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.MARS_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 3098708.0,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.JUPITER_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 1047.3486,
+            places=floatingPointPlaceTolerance)
+
+        self.assertAlmostEqual(
+            ptd.constants.SATURN_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 3497.898,
+            places=floatingPointPlaceTolerance)
+        self.assertAlmostEqual(
+            ptd.constants.URANUS_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 22902.98,
+            places=floatingPointPlaceTolerance)
+        self.assertAlmostEqual(
+            ptd.constants.NEPTUNE_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 19412.24,
+            places=floatingPointPlaceTolerance)
+        self.assertAlmostEqual(
+            ptd.constants.PLUTO_GRAVITATIONAL_PARAMETER,
+            ptd.constants.SUN_GRAVITATIONAL_PARAMETER
+            / 1.35e8,
             places=floatingPointPlaceTolerance)

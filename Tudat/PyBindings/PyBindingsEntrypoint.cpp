@@ -18,8 +18,10 @@ namespace np = boost::numpy;
 #include "WrapperCode/DataStructures/dataStructuresUtility.h"
 
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
-#include "WrapperCode/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+#include "Tudat/PyBindings/WrapperCode/Astrodynamics/BasicAstrodynamics/constants.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
+
 
 #include "WrapperCode/Gravitation/centralGravityModel.h"
 
@@ -36,8 +38,9 @@ BOOST_PYTHON_MODULE (Tudat) {
     tudat::PyBindings_internal::PyExport_DatastructuresUtility();
 
     tudat::PyBindings_internal::PyExport_unitConversions();
-    tudat::PyBindings_internal::PyExport_physicalConstants();
+    tudat::PyBindings_internal::PyExport_constants();
     tudat::PyBindings_internal::PyExport_astrodynamicsFunctions();
+    tudat::PyBindings_internal::PyExport_clohessyWiltshirePropagator();
 
     tudat::PyBindings_internal::PyExport_centralGravityModel();
 }

@@ -29,19 +29,19 @@ void tudat::PyBindings_internal::PyExport_astrodynamicsFunctions() {
 
     {
         p::scope
-        engineScope   = p::class_<dummyClassA_astrodynamicsFunctions>("astrodynamics");
+                engineScope = p::class_<dummyClassA_astrodynamicsFunctions>("astrodynamics");
 
 
         p::def("computeKeplerOrbitalPeriod", &tudat::basic_astrodynamics::computeKeplerOrbitalPeriod,
-                (p::arg("semiMajorAxis"), p::arg("gravitationalParameterOfCentralBody"),
-                                                                        p::arg("massOfOrbitingBody") = 0.0),
-                "Computes the two-body orbital period of an orbiting body that follows a closed conic section\n"
-                "(circle or ellipse Kepler orbit).\n\n The mass of the orbiting body is set to that of a test\n"
-                "particle by default.\n\n"
-                ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
-                ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-                ":param massOfOrbitingBody: Mass of orbiting body.\n"
-                ":return: Two-body orbital period."
+               (p::arg("semiMajorAxis"), p::arg("gravitationalParameterOfCentralBody"),
+                       p::arg("massOfOrbitingBody") = 0.0),
+               "Computes the two-body orbital period of an orbiting body that follows a closed conic section\n"
+               "(circle or ellipse Kepler orbit).\n\n"
+               "The mass of the orbiting body is set to that of a test particle by default.\n\n"
+               ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
+               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+               ":param massOfOrbitingBody: Mass of orbiting body.\n"
+               ":return: Two-body orbital period.\n"
         );
 
         // Note : It is necessary to explicitly cast to function pointer when dealing with overloaded functions
