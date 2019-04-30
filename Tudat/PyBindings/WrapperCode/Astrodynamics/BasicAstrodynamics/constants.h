@@ -15,7 +15,8 @@
 namespace tudat {
     namespace PyBindings_internal {
 
-        void PyExport_physicalConstants();
+        void PyExport_constants();
+
 
     }
 }

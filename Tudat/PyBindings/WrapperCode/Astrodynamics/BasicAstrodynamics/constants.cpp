@@ -8,11 +8,13 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
-#include "physicalConstants.h"
+#include "constants.h"
 #include <boost/python.hpp>
 #include <boost/numpy.hpp>
 
 #include "Tudat/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+#include "Tudat/Astrodynamics/BasicAstrodynamics/celestialBodyConstants.h"
+
 
 namespace p = boost::python;
 namespace np = boost::numpy;
@@ -22,7 +24,7 @@ namespace {
     };
 }
 
-void tudat::PyBindings_internal::PyExport_physicalConstants() {
+void tudat::PyBindings_internal::PyExport_constants() {
     {
         p::scope engineScope
                 = p::class_<dummyClassA_physicalConstants>("constants")
@@ -34,6 +36,10 @@ void tudat::PyBindings_internal::PyExport_physicalConstants() {
                         // Note: Accidentally defining the same variable with the same name produces almost silent bugs
                         //       as the python module only report SystemError: initialization of Tudat raised unreported exception
                         //       and not what variable/function triggered it
+
+
+                        // /////// Physical constants ///////
+
                         .def_readonly("SEA_LEVEL_GRAVITATIONAL_ACCELERATION",
                                       &tudat::physical_constants::SEA_LEVEL_GRAVITATIONAL_ACCELERATION,
                                       " Standard gravitational acceleration at sea-level.")
@@ -106,7 +112,70 @@ void tudat::PyBindings_internal::PyExport_physicalConstants() {
                                 "Relative time rate difference between TCG and TT time scales.")
                         .def_readonly("LB_TIME_RATE_TERM",
                                 &tudat::physical_constants::LB_TIME_RATE_TERM,
-                                "Relative time rate difference between TCB and TDB time scales.");
+                                "Relative time rate difference between TCB and TDB time scales.")
+
+
+
+                        // /////// Celestial body constants ///////
+
+                        .def_readonly("EARTH_EQUATORIAL_RADIUS",
+                                      &tudat::celestial_body_constants::EARTH_EQUATORIAL_RADIUS,
+                                      "Earth equatorial radius in meters [m] (IERS, 2010).")
+
+                        .def_readonly("EARTH_FLATTENING_FACTOR",
+                                      &tudat::celestial_body_constants::EARTH_FLATTENING_FACTOR,
+                                      "Earth flattening factor [-] (IERS, 2010)")
+
+                        .def_readonly("EARTH_GEODESY_NORMALIZED_J2",
+                                      &tudat::celestial_body_constants::EARTH_GEODESY_NORMALIZED_J2,
+                                      "Earth spherical harmonic gravitational field J2 [-] (EGM2008, 2013)")
+
+                        .def_readonly("SUN_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::SUN_GRAVITATIONAL_PARAMETER,
+                                      "Solar gravitational constant in squared meters per second squared [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("MERCURY_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::MERCURY_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Mercury, derived from Sun/Mercury mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("VENUS_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::VENUS_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Venus, derived from Sun/Venus mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("EARTH_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::EARTH_GRAVITATIONAL_PARAMETER,
+                                      "Earth gravitational constant in squared meters per second squared [m^3 s^-2] (IERS, 2012).")
+
+                        .def_readonly("MOON_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::MOON_GRAVITATIONAL_PARAMETER,
+                                      " Moon gravitational constant in squared meters per second squared [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("MARS_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::MARS_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Mars, derived from Sun/Mars mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("JUPITER_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::JUPITER_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Jupiter, derived from Sun/Jupiter mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("SATURN_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::SATURN_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Saturn, derived from Sun/Saturn mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("URANUS_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::URANUS_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Uranus, derived from Sun/Uranus mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("NEPTUNE_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::NEPTUNE_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Neptune, derived from Sun/Neptune mass ratio [m^3 s^-2] (JPL, 2012).")
+
+                        .def_readonly("PLUTO_GRAVITATIONAL_PARAMETER",
+                                      &tudat::celestial_body_constants::PLUTO_GRAVITATIONAL_PARAMETER,
+                                      "Gravitational constant of Pluto, derived from Sun/Pluto mass ratio [m^3 s^-2] (JPL, 2012).")
+        ;
+
+
 
     }
 }
