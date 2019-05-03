@@ -27,6 +27,10 @@ namespace np = boost::numpy;
 
 #include "WrapperCode/Gravitation/centralGravityModel.h"
 
+#include "WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.h"
+#include "WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.h"
+#include "WrapperCode/SimulationSetup/EnvironmentSetup/body.h"
+
 #include "Tudat/Basics/basicTypedefs.h"
 
 
@@ -48,4 +52,9 @@ BOOST_PYTHON_MODULE (Tudat) {
     tudat::PyBindings_internal::PyExport_meanToEccentricAnomalies();
 
     tudat::PyBindings_internal::PyExport_centralGravityModel();
+
+    // Simulation
+    tudat::PyBindings_internal::PyExport_simulationPythonInterfaceInternals();
+    tudat::PyBindings_internal::PyExport_body();
+    tudat::PyBindings_internal::PyExport_createBodies();
 }

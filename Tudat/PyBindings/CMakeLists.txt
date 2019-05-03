@@ -21,6 +21,9 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/body.cpp"
+
         )
 
 # Set the header files.
@@ -34,7 +37,9 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.h"
-        )
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/body.h"
+        WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.cpp WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.h WrapperCode/ContainerIndexing.h)
 
 
 macro(setup_pymodule_target target_name)
@@ -49,7 +54,7 @@ set_target_properties(PyBindings PROPERTIES COMPILE_FLAGS " -fPIC ")
 set_target_properties(PyBindings PROPERTIES LINK_FLAGS " -shared -Wl,-Bshareable")
 set_target_properties(PyBindings PROPERTIES PREFIX "")
 set_target_properties(PyBindings PROPERTIES OUTPUT_NAME "Tudat")
-target_link_libraries(PyBindings tudat_gravitation tudat_basic_astrodynamics)
+target_link_libraries(PyBindings tudat_gravitation tudat_basic_astrodynamics tudat_basic_mathematics ${TUDAT_PROPAGATION_LIBRARIES})
 target_link_libraries(PyBindings -Wl,-Bshareable ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 add_custom_command(

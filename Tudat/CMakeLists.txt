@@ -287,7 +287,7 @@ if(USE_JSON)
   list(APPEND SUBDIRS ${JSONINTERFACEDIR})
 endif()
 
-option(BUILD_PYBINDINGS  "Build the Tudat Python modules" OFF)
+# option(BUILD_PYBINDINGS  "Build the Tudat Python modules" OFF) # this should appear at the bundle level
 if(NOT BUILD_PYBINDINGS)
  message(STATUS "Not building the python modules.")
 else()
