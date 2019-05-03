@@ -24,6 +24,36 @@ namespace {
     };
 }
 
+namespace tudat {
+    namespace PyBindings_internal {
+        namespace {
+
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerOrbitalPeriod_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerOrbitalPeriod, 2, 3);
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerOrbitalVelocity_1_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerOrbitalVelocity, 4, 5);
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerOrbitalVelocity_2_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerOrbitalVelocity, 2, 3);
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerAngularMomentum_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerAngularMomentum,
+                                            3, 4);
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerMeanMotion_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerMeanMotion,
+                                            2, 3);
+
+            BOOST_PYTHON_FUNCTION_OVERLOADS(computeKeplerEnergy_overloads,
+                                            tudat::basic_astrodynamics::computeKeplerEnergy,
+                                            2, 3);
+
+        }
+    }
+}
+
 
 void tudat::PyBindings_internal::PyExport_astrodynamicsFunctions() {
 
@@ -33,15 +63,16 @@ void tudat::PyBindings_internal::PyExport_astrodynamicsFunctions() {
 
 
         p::def("computeKeplerOrbitalPeriod", &tudat::basic_astrodynamics::computeKeplerOrbitalPeriod,
-               (p::arg("semiMajorAxis"), p::arg("gravitationalParameterOfCentralBody"),
-                       p::arg("massOfOrbitingBody") = 0.0),
-               "Computes the two-body orbital period of an orbiting body that follows a closed conic section\n"
-               "(circle or ellipse Kepler orbit).\n\n"
-               "The mass of the orbiting body is set to that of a test particle by default.\n\n"
-               ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Two-body orbital period.\n"
+               computeKeplerOrbitalPeriod_overloads(
+                       (p::arg("semiMajorAxis"), p::arg("gravitationalParameterOfCentralBody"),
+                               p::arg("massOfOrbitingBody") = 0.0),
+                       "Computes the two-body orbital period of an orbiting body that follows a closed conic section\n"
+                       "(circle or ellipse Kepler orbit).\n\n"
+                       "The mass of the orbiting body is set to that of a test particle by default.\n\n"
+                       ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
+                       ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                       ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                       ":return: Two-body orbital period.\n")
         );
 
         // Note : It is necessary to explicitly cast to function pointer when dealing with overloaded functions
@@ -68,74 +99,79 @@ void tudat::PyBindings_internal::PyExport_astrodynamicsFunctions() {
 
         p::def("computeKeplerOrbitalVelocity",
                static_cast<double (*)(const double, const double, const double, const double, const double) >
-               (&tudat::basic_astrodynamics::computeKeplerOrbitalVelocity),
-               (p::arg("semiMajorAxis"),
-                       p::arg("eccentricity"),
-                       p::arg("trueAnomaly"),
-                       p::arg("gravitationalParameterOfCentralBody"),
-                       p::arg("massOfOrbitingBody") = 0.0),
-               "Compute two-body orbital velocity with vis-viva equation.\n\n"
-               ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
-               ":param eccentricity: Eccentricity of Kepler orbit (circle or ellipse).\n"
-               ":param trueAnomaly: True anomaly of Kepler orbit (circle or ellipse).\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Two-body orbital velocity at current conditions."
+               (&tudat::basic_astrodynamics::computeKeplerOrbitalVelocity), computeKeplerOrbitalVelocity_1_overloads(
+                        (p::arg("semiMajorAxis"),
+                                p::arg("eccentricity"),
+                                p::arg("trueAnomaly"),
+                                p::arg("gravitationalParameterOfCentralBody"),
+                                p::arg("massOfOrbitingBody") = 0.0),
+                        "Compute two-body orbital velocity with vis-viva equation.\n\n"
+                        ":param semiMajorAxis: Semi-major axis of Kepler orbit (circle or ellipse).\n"
+                        ":param eccentricity: Eccentricity of Kepler orbit (circle or ellipse).\n"
+                        ":param trueAnomaly: True anomaly of Kepler orbit (circle or ellipse).\n"
+                        ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                        ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                        ":return: Two-body orbital velocity at current conditions."
+                )
         );
 
         p::def("computeKeplerOrbitalVelocity", static_cast<double (*)(const Eigen::Vector6d &, const double,
                                                                       const double)>(&tudat::basic_astrodynamics::computeKeplerOrbitalVelocity),
-               (p::arg("keplerianElements"), p::arg("gravitationalParameterOfCentralBody"), p::arg(
-                       "massOfOrbitingBody") = 0.0),
-               "Compute two-body orbital velocity with vis-viva equation.\n\n"
-               ":param keplerianElements: Vector denoting the Keplerian elements (circle or ellipse).\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Two-body orbital velocity at current conditions."
+               computeKeplerOrbitalVelocity_2_overloads(
+                       (p::arg("keplerianElements"), p::arg("gravitationalParameterOfCentralBody"), p::arg(
+                               "massOfOrbitingBody") = 0.0),
+                       "Compute two-body orbital velocity with vis-viva equation.\n\n"
+                       ":param keplerianElements: Vector denoting the Keplerian elements (circle or ellipse).\n"
+                       ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                       ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                       ":return: Two-body orbital velocity at current conditions."
+               )
         );
 
         p::def("computeKeplerAngularMomentum", static_cast<double (*)(const double, const double, const double,
                                                                       const double)>(&tudat::basic_astrodynamics::computeKeplerAngularMomentum),
-               (p::arg("semiMajorAxis"),
-                       p::arg("eccentricity"),
-                       p::arg("gravitationalParameterOfCentralBody"),
-                       p::arg("massOfOrbitingBody") = 0.0),
-               "Computes the angular momentum of an orbiting body that follows a conic section (Kepler orbit),\n"
-               "relative to the center-of-mass of the central body. The default mass value is for the angular\n"
-               "momentum per unit mass.\n\n"
-               ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
-               ":param eccentricity: Eccentricity of Kepler orbit.\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Two-body angular momentum."
+               computeKeplerAngularMomentum_overloads((p::arg("semiMajorAxis"),
+                                                              p::arg("eccentricity"),
+                                                              p::arg("gravitationalParameterOfCentralBody"),
+                                                              p::arg("massOfOrbitingBody") = 0.0),
+                                                      "Computes the angular momentum of an orbiting body that follows a conic section (Kepler orbit),\n"
+                                                      "relative to the center-of-mass of the central body. The default mass value is for the angular\n"
+                                                      "momentum per unit mass.\n\n"
+                                                      ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
+                                                      ":param eccentricity: Eccentricity of Kepler orbit.\n"
+                                                      ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                                                      ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                                                      ":return: Two-body angular momentum.")
         );
 
         p::def("computeKeplerMeanMotion", static_cast<double (*)(const double, const double,
                                                                  const double)>(&tudat::basic_astrodynamics::computeKeplerMeanMotion),
-               (p::arg("semiMajorAxis"),
-                       p::arg("gravitationalParameterOfCentralBody"),
-                       p::arg("massOfOrbitingBody") = 0.0),
-               "Computes the two-body mean motion of an orbiting body that follows a conic section\n"
-               "(Kepler orbit). The mass of the orbiting body is set to that of a test particle by default.\n\n"
-               ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Two-body mean motion."
+               computeKeplerMeanMotion_overloads((p::arg("semiMajorAxis"),
+                                                         p::arg("gravitationalParameterOfCentralBody"),
+                                                         p::arg("massOfOrbitingBody") = 0.0),
+                                                 "Computes the two-body mean motion of an orbiting body that follows a conic section\n"
+                                                 "(Kepler orbit). The mass of the orbiting body is set to that of a test particle by default.\n\n"
+                                                 ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
+                                                 ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                                                 ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                                                 ":return: Two-body mean motion."
+               )
         );
 
         p::def("computeKeplerEnergy", static_cast<double (*)(const double, const double,
                                                              const double)>(&tudat::basic_astrodynamics::computeKeplerEnergy),
-               (p::arg("semiMajorAxis"),
-                       p::arg("gravitationalParameterOfCentralBody"),
-                       p::arg("massOfOrbitingBody") = 1.0),
-               "Computes the energy of an orbiting body that follows a conic section (Kepler orbit). The\n"
-               "default mass value is for the two-body orbital energy per unit mass. For closed conic sections\n"
-               "(circles, ellipses), the semi-major axis is positive, and for open sections (hyperbolas) the\n"
-               "semi-major axis is negative.\n\n"
-               ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
-               ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
-               ":param massOfOrbitingBody: Mass of orbiting body.\n"
-               ":return: Kepler orbital energy."
+               computeKeplerEnergy_overloads((p::arg("semiMajorAxis"),
+                                                     p::arg("gravitationalParameterOfCentralBody"),
+                                                     p::arg("massOfOrbitingBody") = 1.0),
+                                             "Computes the energy of an orbiting body that follows a conic section (Kepler orbit). The\n"
+                                             "default mass value is for the two-body orbital energy per unit mass. For closed conic sections\n"
+                                             "(circles, ellipses), the semi-major axis is positive, and for open sections (hyperbolas) the\n"
+                                             "semi-major axis is negative.\n\n"
+                                             ":param semiMajorAxis: Semi-major axis of Kepler orbit.\n"
+                                             ":param gravitationalParameterOfCentralBody: Gravitational parameter of central body.\n"
+                                             ":param massOfOrbitingBody: Mass of orbiting body.\n"
+                                             ":return: Kepler orbital energy."
+               )
         );
 
 
