@@ -19,7 +19,8 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.cpp"
-
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.cpp"
         )
 
 # Set the header files.
@@ -31,7 +32,8 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/DataStructures/dataStructuresUtility.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/centralGravityModel.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
-
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.h"
         )
 
 

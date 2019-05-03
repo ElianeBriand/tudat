@@ -26,6 +26,8 @@ namespace np = boost::numpy;
 void tudat::PyBindings_internal::PyExport_clohessyWiltshirePropagator() {
 
     p::def("propagateClohessyWiltshire", &tudat::basic_astrodynamics::propagateClohessyWiltshire,
+           (p::arg("initialState"), p::arg("propagationDuration"), p::arg("centralBodyGravitationalParameter"),
+                   p::arg("referenceOrbitRadius")),
             "This function propagates linearized relative motion, based on the Clohessy-Wiltshire equations.\n"
             "It calculates the motion of a point mass A with respect to a local-vertical-local-horizontal\n"
             "reference frame centered on a point mass B.\n"
