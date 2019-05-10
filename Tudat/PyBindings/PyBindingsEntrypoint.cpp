@@ -8,6 +8,7 @@
  *    http://tudat.tudelft.nl/LICENSE.
  */
 
+
 #include <boost/python.hpp>
 #include <boost/numpy.hpp>
 
@@ -21,6 +22,7 @@ namespace np = boost::numpy;
 
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/constants.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.h"
@@ -47,6 +49,7 @@ BOOST_PYTHON_MODULE (Tudat) {
 
     tudat::PyBindings_internal::PyExport_unitConversions();
     tudat::PyBindings_internal::PyExport_constants();
+    tudat::PyBindings_internal::PyExport_orbitalElementsConversions();
     tudat::PyBindings_internal::PyExport_astrodynamicsFunctions();
     tudat::PyBindings_internal::PyExport_clohessyWiltshirePropagator();
     tudat::PyBindings_internal::PyExport_meanToEccentricAnomalies();
@@ -57,4 +60,12 @@ BOOST_PYTHON_MODULE (Tudat) {
     tudat::PyBindings_internal::PyExport_simulationPythonInterfaceInternals();
     tudat::PyBindings_internal::PyExport_body();
     tudat::PyBindings_internal::PyExport_createBodies();
+
+
+
+
 }
+
+
+
+

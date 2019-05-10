@@ -23,6 +23,7 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.cpp"
         )
 
 # Set the header files.
@@ -38,6 +39,7 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.h"
 
         )
 
