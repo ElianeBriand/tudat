@@ -21,9 +21,8 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.cpp"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/body.cpp"
-
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.cpp"
         )
 
 # Set the header files.
@@ -37,9 +36,10 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.h"
-        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/EnvironmentSetup/body.h"
-        WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.cpp WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.h WrapperCode/ContainerIndexing.h)
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.h"
+
+        )
 
 
 macro(setup_pymodule_target target_name)
