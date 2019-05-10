@@ -19,10 +19,7 @@
 namespace p = boost::python;
 namespace np = boost::numpy;
 
-namespace {
-    class dummyClassA_astrodynamicsFunctions {
-    };
-}
+
 
 namespace tudat {
     namespace PyBindings_internal {
@@ -58,8 +55,6 @@ namespace tudat {
 void tudat::PyBindings_internal::PyExport_astrodynamicsFunctions() {
 
     {
-        p::scope
-                engineScope = p::class_<dummyClassA_astrodynamicsFunctions>("astrodynamics");
 
 
         p::def("computeKeplerOrbitalPeriod", &tudat::basic_astrodynamics::computeKeplerOrbitalPeriod,

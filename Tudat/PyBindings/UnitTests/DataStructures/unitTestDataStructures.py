@@ -185,6 +185,31 @@ class TestEigenStructures_Vector3d(unittest.TestCase):
 
         self.assertTrue(np.allclose(vnp, refnp))
 
+    def test_Matrix3d_indexing(self):
+        m = ptd.Matrix3d()
+
+        m = ptd.Matrix3d.fromList(
+            [[1,2,3],[4,5,6],[7,8,9]]
+        )
+
+        self.assertEqual(m[0,0], 1.0)
+        self.assertEqual(m[1,0], 4.0)
+        self.assertEqual(m[0,1], 2.0)
+
+        m[0,1] = 5
+        self.assertEqual(m[0,1], 5.0)
+
+        self.assertEqual(m[2], [7,8,9])
+
+
+        with self.assertRaises(IndexError):
+            a = m[3]
+        with self.assertRaises(IndexError):
+            m[3] = 3
+        with self.assertRaises(IndexError):
+            a = m[0,3]
+        with self.assertRaises(IndexError):
+            m[0,3] = 3
 
 if __name__ == '__main__':
     unittest.main()

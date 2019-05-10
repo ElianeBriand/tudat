@@ -64,6 +64,11 @@ namespace tudat {
                 return tudat::simulation_setup::getDefaultBodySettings(bodiesNameList);
             }
 
+            std::shared_ptr< tudat::simulation_setup::BodySettings> getDefaultBodySettings_oneBody(p::str body ) {
+                std::string bodyName = p::extract<std::string> (body)();
+                return tudat::simulation_setup::getDefaultSingleBodySettings(bodyName, TUDAT_NAN, TUDAT_NAN, TUDAT_NAN );
+            }
+
         }
 
 
@@ -127,12 +132,19 @@ namespace tudat {
                    )
                    );
 
-            p::def("getDefaultBodySettings", &getDefaultBodySettings_lax_fromPyList,
+            p::def("getDefaultBodySettingsMap", &getDefaultBodySettings_lax_fromPyList,
                    (p::arg("bodies")),
                    "Function to create default settings from which to create a set of body objects using\n"
                    "the createBodies() function. This function is included to streamline and simplify the\n"
-                   "creation of typical celestial bodies. The default settings for the various\n"
-                   "environment models of the body are defined in the various functions defined in this file.\n\n\n"
+                   "creation of typical celestial bodies.\n\n\n"
+                   ":param bodies: List of bodies name as string, for which default settings are to be retrieved.\n"
+                   ":return: Default settings from which to create a set of body objects.\n\n");
+
+            p::def("getDefaultBodySettings", &getDefaultBodySettings_oneBody,
+                   (p::arg("body")),
+                   "Function to create default settings from which to create a body using\n"
+                   "the createBodies() function. This function is included to streamline and simplify the\n"
+                   "creation of typical celestial bodies.\n\n\n"
                    ":param bodies: List of bodies name as string, for which default settings are to be retrieved.\n"
                    ":return: Default settings from which to create a set of body objects.\n\n");
         }

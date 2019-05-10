@@ -317,6 +317,7 @@ else()
  set(PYBINDINGS_DIR "/PyBindings")
  list(APPEND SUBDIRS ${PYBINDINGS_DIR})
  set(CMAKE_POSITION_INDEPENDENT_CODE ON) # We need -fPIC even in static libraries
+# cmake_policy(SET CMP0063 OLD)
 endif()
 
 # Add sub-directories to CMake process.

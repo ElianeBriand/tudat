@@ -23,7 +23,7 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
         earthGravitationalParameter = ptd.constants.GRAVITATIONAL_CONSTANT * 5.9736e24
         distanceBetweenSatelliteAndEarth = 4.2164e7
 
-        orbitalPeriod = ptd.astrodynamics.computeKeplerOrbitalPeriod(distanceBetweenSatelliteAndEarth,
+        orbitalPeriod = ptd.computeKeplerOrbitalPeriod(distanceBetweenSatelliteAndEarth,
                                                                      earthGravitationalParameter,
                                                                      satelliteMass)
 
@@ -35,10 +35,10 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
             places=5)
 
     def test_KeplerRadialDistance(self):
-        radialDistance1 = ptd.astrodynamics.computeKeplerRadialDistance(self.keplerianElements[0],
+        radialDistance1 = ptd.computeKeplerRadialDistance(self.keplerianElements[0],
                                                                         self.keplerianElements[1],
                                                                         self.keplerianElements[5])
-        radialDistance2 = ptd.astrodynamics.computeKeplerRadialDistance(self.keplerianElements)
+        radialDistance2 = ptd.computeKeplerRadialDistance(self.keplerianElements)
 
         expectedRadialDistance = 4032815.56442827
 
@@ -58,7 +58,7 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
         distanceBetweenSatelliteAndEarth = 4.2164e7
         eccentricityOfSatelliteOrbit = 0.0
 
-        angularMomentum = ptd.astrodynamics.computeKeplerAngularMomentum(
+        angularMomentum = ptd.computeKeplerAngularMomentum(
             distanceBetweenSatelliteAndEarth, eccentricityOfSatelliteOrbit,
             self.earthGravitationalParameter, satelliteMass)
 
@@ -71,10 +71,10 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
             places=floatingPointPlaceTolerance)
 
     def test_KeplerOrbitalVelocity(self):
-        orbitalVelocity1 = ptd.astrodynamics.computeKeplerOrbitalVelocity(
+        orbitalVelocity1 = ptd.computeKeplerOrbitalVelocity(
             self.keplerianElements[0], self.keplerianElements[1], self.keplerianElements[5],
             self.earthGravitationalParameter)
-        orbitalVelocity2 = ptd.astrodynamics.computeKeplerOrbitalVelocity(
+        orbitalVelocity2 = ptd.computeKeplerOrbitalVelocity(
             self.keplerianElements, self.earthGravitationalParameter)
 
         expectedOrbitalVelocity = 13503.4992923871
@@ -94,7 +94,7 @@ class TestAstrodynamicsFunctions(unittest.TestCase):
 
         distanceBetweenSatelliteAndEarth = 4.2164e7
 
-        meanMotion = ptd.astrodynamics.computeKeplerMeanMotion(
+        meanMotion = ptd.computeKeplerMeanMotion(
             distanceBetweenSatelliteAndEarth, self.earthGravitationalParameter, satelliteMass)
 
         expectedMeanMotion = 7.2921e-5

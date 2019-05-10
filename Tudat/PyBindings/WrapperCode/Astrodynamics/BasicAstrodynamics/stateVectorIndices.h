@@ -7,16 +7,17 @@
  *    a copy of the license with this file. If not, please or visit:
  *    http://tudat.tudelft.nl/LICENSE.
  */
-#ifndef TUDAT_PYBINDINGS_BODY_H
-#define TUDAT_PYBINDINGS_BODY_H
 
+#ifndef TUDAT_PYBINDINGS_STATEVECTORINDICES_H
+#define TUDAT_PYBINDINGS_STATEVECTORINDICES_H
 
 namespace tudat {
     namespace PyBindings_internal {
 
-        void PyExport_body();
+        void PyExport_stateVectorIndices();
 
     }
 }
 
-#endif //TUDATBUNDLE_BODY_H
+
+#endif //TUDAT_PYBINDINGS_STATEVECTORINDICES_H

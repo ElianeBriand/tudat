@@ -23,6 +23,12 @@ set(PYBINDINGS_SOURCES
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/accelerationSettings.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/accelerationModel.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createAccelerationModels.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/stateVectorIndices.cpp"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/gravityFieldModel.cpp"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.cpp"
         )
 
@@ -39,6 +45,13 @@ set(PYBINDINGS_HEADERS
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Mathematics/rootFinder.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createBodies.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/body.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/ContainerIndexing.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/accelerationSettings.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/accelerationModel.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/SimulationSetup/createAccelerationModels.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/stateVectorIndices.h"
+        "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Gravitation/gravityFieldModel.h"
         "${SRCROOT}${PYBINDINGS_DIR}/WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.h"
 
         )
@@ -52,7 +65,7 @@ endmacro()
 
 add_library(PyBindings MODULE ${PYBINDINGS_HEADERS} ${PYBINDINGS_SOURCES})
 target_include_directories(PyBindings PRIVATE ${PYTHON_INCLUDE_DIRS})
-set_target_properties(PyBindings PROPERTIES COMPILE_FLAGS " -fPIC ")
+set_target_properties(PyBindings PROPERTIES COMPILE_FLAGS " -fPIC -DBOOST_PYTHON_USE_GCC_SYMBOL_VISIBILITY=1")
 set_target_properties(PyBindings PROPERTIES LINK_FLAGS " -shared -Wl,-Bshareable")
 set_target_properties(PyBindings PROPERTIES PREFIX "")
 set_target_properties(PyBindings PROPERTIES OUTPUT_NAME "Tudat")

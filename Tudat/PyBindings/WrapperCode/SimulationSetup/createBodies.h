@@ -19,4 +19,4 @@ namespace tudat {
     }
 }
 
-#endif //TUDATBUNDLE_CREATEBODIES_H
+#endif //TUDAT_PYBINDINGS_CREATEBODIES_H

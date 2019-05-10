@@ -22,16 +22,23 @@ namespace np = boost::numpy;
 
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/unitConversions.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/constants.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/stateVectorIndices.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/orbitalElementsConversions.h"
+#include "WrapperCode/Astrodynamics/BasicAstrodynamics/accelerationModel.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/clohessyWiltshirePropagator.h"
 #include "WrapperCode/Astrodynamics/BasicAstrodynamics/meanToEccentricAnomalies.h"
 
 #include "WrapperCode/Gravitation/centralGravityModel.h"
+#include "WrapperCode/Gravitation/gravityFieldModel.h"
+
+
 
 #include "WrapperCode/SimulationSetup/simulationPythonInterfaceInternals.h"
-#include "WrapperCode/SimulationSetup/EnvironmentSetup/createBodies.h"
-#include "WrapperCode/SimulationSetup/EnvironmentSetup/body.h"
+#include "Tudat/PyBindings/WrapperCode/SimulationSetup/createBodies.h"
+#include "Tudat/PyBindings/WrapperCode/SimulationSetup/body.h"
+#include "Tudat/PyBindings/WrapperCode/SimulationSetup/accelerationSettings.h"
+#include "Tudat/PyBindings/WrapperCode/SimulationSetup/createAccelerationModels.h"
 
 #include "Tudat/Basics/basicTypedefs.h"
 
@@ -49,17 +56,22 @@ BOOST_PYTHON_MODULE (Tudat) {
 
     tudat::PyBindings_internal::PyExport_unitConversions();
     tudat::PyBindings_internal::PyExport_constants();
+    tudat::PyBindings_internal::PyExport_stateVectorIndices();
     tudat::PyBindings_internal::PyExport_orbitalElementsConversions();
+    tudat::PyBindings_internal::PyExport_accelerationModel();
     tudat::PyBindings_internal::PyExport_astrodynamicsFunctions();
     tudat::PyBindings_internal::PyExport_clohessyWiltshirePropagator();
     tudat::PyBindings_internal::PyExport_meanToEccentricAnomalies();
 
     tudat::PyBindings_internal::PyExport_centralGravityModel();
+    tudat::PyBindings_internal::PyExport_gravityFieldModel();
 
     // Simulation
     tudat::PyBindings_internal::PyExport_simulationPythonInterfaceInternals();
     tudat::PyBindings_internal::PyExport_body();
     tudat::PyBindings_internal::PyExport_createBodies();
+    tudat::PyBindings_internal::PyExport_accelerationSettings();
+    tudat::PyBindings_internal::PyExport_createAccelerationModels();
 
 
 
