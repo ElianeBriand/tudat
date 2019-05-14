@@ -144,6 +144,18 @@ namespace tudat {
             return vecList;
         }
 
+        template<>
+        p::list Vector_toList<Eigen::VectorXd>(Eigen::VectorXd* vec) {
+            p::list vecList;
+
+            for (unsigned int j = 0; j < vec->size(); ++j) {
+                p::list coordList;
+                coordList.append((double) (*vec)[j]);
+                vecList.append(coordList);
+            }
+            return vecList;
+        }
+
 
         // Useful helpers for python []-access
         template<typename EigenVectorType>
@@ -166,6 +178,14 @@ namespace tudat {
             }
         }
 
+        template<>
+        void Vector_setElemAtIndexHelper<Eigen::VectorXd>(Eigen::VectorXd* vec, int index, double value) {
+            if (index >= vec->size() || index < 0) {
+                throw std::out_of_range("Vector access out of range.");
+            }
+            (*vec)[index] = value;
+        }
+
         template<typename EigenVectorType>
         double Vector_getElemAtIndexHelper(EigenVectorType* vec, int index) {
             if (index >= EigenVectorType::RowsAtCompileTime || index < 0) {
@@ -186,6 +206,14 @@ namespace tudat {
             }
         }
 
+        template<>
+        double Vector_getElemAtIndexHelper<Eigen::VectorXd>(Eigen::VectorXd* vec, int index) {
+            if (index >= vec->size() || index < 0) {
+                throw std::out_of_range("Vector access out of range.");
+            }
+            return (*vec)[index];
+        }
+
 
         template<typename EigenVectorType>
         class EigenVector_iterator
@@ -196,6 +224,7 @@ namespace tudat {
                     : vector_(nullptr),
                       position(EigenVectorType::RowsAtCompileTime) // Default constructor gives end iterator
             {}
+
 
 
             explicit EigenVector_iterator(EigenVectorType* vector)
@@ -224,6 +253,44 @@ namespace tudat {
 
         };
 
+        template<>
+        class EigenVector_iterator<Eigen::VectorXd>
+                : public boost::iterator_facade<EigenVector_iterator<Eigen::VectorXd>, double, boost::forward_traversal_tag> {
+        public:
+
+            EigenVector_iterator(Eigen::VectorXd* vec, bool dispatchTag)
+                    : vector_(vec),
+                      position(vec->size())
+            {}
+
+
+
+            explicit EigenVector_iterator(Eigen::VectorXd* vector)
+                    : vector_(vector),
+                      position(0) {}
+
+        private:
+            Eigen::VectorXd* vector_;
+            unsigned int position;
+
+            friend class boost::iterator_core_access;
+
+            void increment() { position++; }
+
+            bool equal(EigenVector_iterator const &other) const {
+                return this->position == other.position;
+            }
+
+            double &dereference() const {
+                if (position < vector_->size()) {
+                    return (*vector_)[position];
+                } else {
+                    throw std::out_of_range("Vector iterator out of range");
+                }
+            }
+
+        };
+
         template<typename EigenVectorType>
         EigenVector_iterator<EigenVectorType> Vector_begin(EigenVectorType &vec) {
             return EigenVector_iterator<EigenVectorType>(&vec);
@@ -232,6 +299,11 @@ namespace tudat {
         template<typename EigenVectorType>
         EigenVector_iterator<EigenVectorType> Vector_end(EigenVectorType &vec) {
             return EigenVector_iterator<EigenVectorType>();
+        }
+
+        template<>
+        EigenVector_iterator<Eigen::VectorXd> Vector_end<Eigen::VectorXd>(Eigen::VectorXd& vec) {
+            return EigenVector_iterator<Eigen::VectorXd>(&vec, true);
         }
 
 
@@ -255,6 +327,18 @@ namespace tudat {
             np::dtype dtype = np::dtype::get_builtin<double>();
 
             p::list vecAsPythonList = Vector_toList<Eigen::Quaterniond>(qt);
+            np::ndarray a = np::array(vecAsPythonList, dtype);
+            return a;
+        }
+
+        template<>
+        np::ndarray Vector_toNPArray<Eigen::VectorXd>(Eigen::VectorXd* vec) {
+
+            const unsigned int rows = vec->size();
+            p::tuple shape = p::make_tuple(rows, 1); // as row vector
+            np::dtype dtype = np::dtype::get_builtin<double>();
+
+            p::list vecAsPythonList = Vector_toList<Eigen::VectorXd>(vec);
             np::ndarray a = np::array(vecAsPythonList, dtype);
             return a;
         }
@@ -371,6 +455,23 @@ namespace tudat {
             return double(mat->coeff(row,column));
         }
 
+        std::shared_ptr<Eigen::VectorXd> VectorXd_ConstructorWrapper_default() {
+            auto ret = std::make_shared<Eigen::VectorXd>();
+            return ret;
+        }
+
+        template<typename EigenVectorType>
+        std::shared_ptr<Eigen::VectorXd> VectorXd_ConstructorWrapper_fromOtherVector(EigenVectorType* othervector) {
+            auto ret = std::make_shared<Eigen::VectorXd>();
+            *ret = *othervector;
+            return ret;
+        }
+
+        template<typename EigenVectorType>
+        int Vector_size(EigenVectorType* vec) {
+            return vec->size();
+        }
+
 
         void PyExport_EigenDatastructures() {
 
@@ -389,7 +490,8 @@ namespace tudat {
                     .def("__iter__", p::range(&Vector_begin<Eigen::Vector3d>, &Vector_end<Eigen::Vector3d>))
                     .def("toNumpy", &Vector_toNPArray<Eigen::Vector3d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector3d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector3d>);
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector3d>)
+                    .def("_size", &Vector_size<Eigen::Vector3d>);
 
             p::class_<Eigen::Quaterniond>("Quaternion")
                     .def(p::init<double, double, double, double>())  // Constructor from x,y,z
@@ -419,7 +521,8 @@ namespace tudat {
                     .def("__iter__", p::range(&Vector_begin<Eigen::Vector6d>, &Vector_end<Eigen::Vector6d>))
                     .def("toNumpy", &Vector_toNPArray<Eigen::Vector6d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector6d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector6d>);
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector6d>)
+                    .def("_size", &Vector_size<Eigen::Vector6d>);
 
 
             p::class_<Eigen::Vector4d, std::shared_ptr<Eigen::Vector4d>>("Vector4d", p::no_init)
@@ -433,7 +536,8 @@ namespace tudat {
                     .def("__iter__", p::range(&Vector_begin<Eigen::Vector4d>, &Vector_end<Eigen::Vector4d>))
                     .def("toNumpy", &Vector_toNPArray<Eigen::Vector4d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector4d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector4d>);
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector4d>)
+                    .def("_size", &Vector_size<Eigen::Vector4d>);
 
             p::class_<Eigen::Vector7d, std::shared_ptr<Eigen::Vector7d>>("Vector7d", p::no_init)
                     // Some magic is required to implement the constructor as a wrapper (because Eigen doesn't define it)
@@ -446,12 +550,30 @@ namespace tudat {
                     .def("__iter__", p::range(&Vector_begin<Eigen::Vector7d>, &Vector_end<Eigen::Vector7d>))
                     .def("toNumpy", &Vector_toNPArray<Eigen::Vector7d>)
                     .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::Vector7d>)
-                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector7d>);
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::Vector7d>)
+                    .def("_size", &Vector_size<Eigen::Vector7d>);
 
             p::class_<Eigen::Matrix3d, std::shared_ptr<Eigen::Matrix3d>>("Matrix3d", p::no_init)
                     .def("__init__", p::make_constructor(&Matrix_ConstructorWrapper_default<Eigen::Matrix3d>))
                     .def("_setElem", &Matrix_setElemHelper<Eigen::Matrix3d>)
                     .def("_getElem", &Matrix_getElemHelper<Eigen::Matrix3d>);
+
+            p::class_<Eigen::VectorXd, std::shared_ptr<Eigen::VectorXd>>("VectorXd", p::no_init)
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_default))
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_fromOtherVector<Eigen::VectorXd>))
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_fromOtherVector<Eigen::Vector7d>))
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_fromOtherVector<Eigen::Vector6d>))
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_fromOtherVector<Eigen::Vector4d>))
+                    .def("__init__", p::make_constructor(&VectorXd_ConstructorWrapper_fromOtherVector<Eigen::Vector3d>))
+                    .def("norm", &Eigen::VectorXd::norm)
+                    .def("normalize", &Eigen::VectorXd::normalize)
+                    .def("columnList", &Vector_toList<Eigen::VectorXd>)
+                    .def("__iter__", p::range(&Vector_begin<Eigen::VectorXd>, &Vector_end<Eigen::VectorXd>))
+                    .def("toNumpy", &Vector_toNPArray<Eigen::VectorXd>)
+                    .def("_getElemAtIndex", &Vector_getElemAtIndexHelper<Eigen::VectorXd>)
+                    .def("_setElemAtIndex", &Vector_setElemAtIndexHelper<Eigen::VectorXd>)
+                    .def("_size", &Vector_size<Eigen::VectorXd>)
+                    ;
 
         }
 
